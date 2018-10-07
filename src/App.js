@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ToDoList from "./components/ToDoList";
+import OffersList from "./components/OffersList";
 import HomePage from "./components/HomePage";
 import InsertOffer from "./components/InsertOffer";
 import SignIn from "./components/SignIn";
@@ -18,7 +18,7 @@ class App extends Component {
       <BrowserRouter>
         <div className="container">
           <Route exact path="/" component={SignIn} />
-          <Route path="/app" component={requireAuth(ToDoList)} />
+          <Route path="/app" component={requireAuth(OffersList)} />
           <Route path="/home" component={HomePage} />
           <Route path="/new-offer" component={InsertOffer} />
         </div>

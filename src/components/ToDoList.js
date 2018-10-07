@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
 import * as actions from "../actions";
-import ToDoListItem from "./ToDoListItem";
+import OfferItem from "./OfferItem";
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
@@ -51,7 +51,7 @@ class ToDoList extends Component {
     const { data } = this.props;
 
     const toDos = _.map(data, (value, key) => {
-      return <ToDoListItem key={key} todoId={key} todo={value} />;
+      return <OfferItem key={key} todoId={key} todo={value} />;
     });
     if (!_.isEmpty(toDos)) {
       return toDos;
@@ -70,7 +70,7 @@ class ToDoList extends Component {
   }
 
   componentWillMount() {
-    this.props.fetchToDos();
+    this.props.fetchOffers();
   }
 
   render() {
@@ -83,7 +83,7 @@ class ToDoList extends Component {
       },
     }
 
-    
+
     return (
       <Grid container spacing={16}>
         <Grid item xs={12}>

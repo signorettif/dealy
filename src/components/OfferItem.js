@@ -2,13 +2,13 @@
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { completeToDo } from "../actions";
+import { addComment } from "../actions";
 import { CardContent, CardActions, Typography, Button, Card } from "@material-ui/core";
 
 class ToDoListItem extends Component {
   handleCompleteClick = completeToDoId => {
-    const { completeToDo } = this.props;
-    completeToDo(completeToDoId);
+    const { addComment } = this.props;
+    addComment(completeToDoId);
   };
 
   render() {
@@ -33,7 +33,7 @@ class ToDoListItem extends Component {
         <CardContent>
           <Typography variant="headline" component="h2" style={styles.title}>{todo.title}{" "}</Typography>
               <CardActions>
-                <Button 
+                <Button
                   onClick={() => this.handleCompleteClick(todoId)}
                   variant="outlined" color="primary"
                   style={styles.button}
@@ -48,4 +48,4 @@ class ToDoListItem extends Component {
 }
 
 // The connect method takes two arguments: the function which is taking the data from  store and the the object containing actions.
-export default connect(null, { completeToDo })(ToDoListItem);
+export default connect(null, { addComment })(ToDoListItem);

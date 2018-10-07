@@ -1,32 +1,27 @@
 // This is the entry point for the actions module and contains 3 actions
 
-import { todosRef, authRef, provider, offersRef } from "../config/firebase";
-import { FETCH_TODOS, FETCH_USER } from "./types";
+import { authRef, provider, offersRef } from "../config/firebase";
+import { FETCH_OFFERS, FETCH_USER } from "./types";
 
-// Add new task to the list of tasks
-export const addToDo = newToDo => async dispatch => {
-  todosRef.push().set(newToDo);
-};
-
+// Add new oofer
 export const addOffer = newOffer => async dispatch => {
   offersRef.push().set(newOffer);
 };
 
-// Remove task
-export const completeToDo = completeToDoId => async dispatch => {
-  todosRef.child(completeToDoId).remove();
+// Add comment to the offer
+export const addComment = addCommentOfferId => async dispatch => {
+  offersRef.child(addCommentOfferId).remove();
 };
 
 // Listen for changes and if there is any, fetch the data
-export const fetchToDos = () => async dispatch => {
-  todosRef.on("value", snapshot => {
+export const fetchOffers = () => async dispatch => {
+  offersRef.on("value", snapshot => {
     dispatch({
-      type: FETCH_TODOS,
+      type: FETCH_OFFERS,
       payload: snapshot.val()
     });
   });
 };
-
 
 export const fetchUser = () => dispatch => {
   authRef.onAuthStateChanged(user => {

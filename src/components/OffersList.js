@@ -60,12 +60,7 @@ class OffersList extends Component {
 
     return (
       <div className="col s10 offset-s1 center-align">
-        <img
-          alt="Nothing was found"
-          id="nothing-was-found"
-          src="/img/nothing.png"
-        />
-        <h4>You have completed all the tasks</h4>
+        <h4>There are currently no offers outstanding</h4>
         <p>Start by clicking add button in the bottom of the screen</p>
       </div>
     );
@@ -78,13 +73,6 @@ class OffersList extends Component {
   render() {
     const { addFormVisible } = this.state;
 
-    const styles = {
-      button: {
-        display: 'block',
-        margin: 'auto'
-      },
-    }
-
 
     return (
       <Grid container spacing={16}>
@@ -94,15 +82,10 @@ class OffersList extends Component {
         </Grid>
         <Grid item xs={12}>
           <Button
-            onClick={() => this.setState({ addFormVisible: !addFormVisible })}
+            href="./new-offer"
             className="btn-floating btn-large teal darken-4"
-            style = {styles.button}
           >
-            {addFormVisible ? (
-              <span>close</span>
-            ) : (
-              <span>add</span>
-            )}
+            <span>Add new offer</span>
           </Button>
         </Grid>
       </Grid>

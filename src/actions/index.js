@@ -13,6 +13,15 @@ export const addComment = addCommentOfferId => async dispatch => {
   //offersRef.child(addCommentOfferId).remove();
 };
 
+// Add comment to the offer
+export const getOfferById = offerId => dispatch => {
+  offersRef.child(offerId).on("value", snapshot => {
+    dispatch({
+      payload: snapshot.val()
+    });
+  });
+};
+
 // Listen for changes and if there is any, fetch the data
 export const fetchOffers = () => async dispatch => {
   offersRef.on("value", snapshot => {

@@ -34,6 +34,7 @@ class InsertOffer extends Component {
       title: this.state.title,
       discountedAmount: this.state.discountedAmount,
       originalAmount: this.state.originalAmount,
+      description: this.state.description,
     })
 
     console.log(this.props)

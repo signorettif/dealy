@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import ToDoList from "./components/ToDoList";
+import HomePage from "./components/HomePage";
+import InsertOffer from "./components/InsertOffer";
 import SignIn from "./components/SignIn";
 import requireAuth from "./components/auth/requireAuth";
 import { BrowserRouter, Route } from "react-router-dom";
@@ -17,6 +19,8 @@ class App extends Component {
         <div className="container">
           <Route exact path="/" component={SignIn} />
           <Route path="/app" component={requireAuth(ToDoList)} />
+          <Route path="/home" component={HomePage} />
+          <Route path="/new-offer" component={InsertOffer} />
         </div>
       </BrowserRouter>
     );

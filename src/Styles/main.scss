@@ -4,3 +4,14 @@ body{
     background: $primary-color;
     font-size: 40px;
 }
+
+.container{
+    max-width: 1024px;
+    padding: 20px;
+    background: white;
+    margin: auto;
+}
+
+.full-width{
+    width: 100%;
+}

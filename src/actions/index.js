@@ -1,11 +1,15 @@
 // This is the entry point for the actions module and contains 3 actions
 
-import { todosRef, authRef, provider } from "../config/firebase";
+import { todosRef, authRef, provider, offersRef } from "../config/firebase";
 import { FETCH_TODOS, FETCH_USER } from "./types";
 
 // Add new task to the list of tasks
 export const addToDo = newToDo => async dispatch => {
   todosRef.push().set(newToDo);
+};
+
+export const addOffer = newOffer => async dispatch => {
+  offersRef.push().set(newOffer);
 };
 
 // Remove task

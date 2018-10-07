@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import ReduxThunk from 'redux-thunk';
 import _ from "lodash";
 import * as actions from "../actions";
-import {FormControl, InputLabel, Input, InputAdornment, TextField, Button, Grid, Divider} from '@material-ui/core';
+import {FormControl, InputLabel, Input, InputAdornment, TextField, Button, Grid, Divider, Chip} from '@material-ui/core';
 import "../styles/insertOffer.scss"
 
 class InsertOffer extends Component {
@@ -12,7 +13,8 @@ class InsertOffer extends Component {
     link:'',
     originalAmount: '',
     discountedAmount: '',
-    description: ''
+    description: '',
+    voucher:''
   };
 
   componentWillMount() {
@@ -31,15 +33,16 @@ class InsertOffer extends Component {
     // this.setState({ addFormValue: "" });
 
     const {addOffer} = this.props;
-    addOffer({
+      addOffer({
       title: this.state.title,
       link: this.state.link,
       discountedAmount: this.state.discountedAmount,
       originalAmount: this.state.originalAmount,
       description: this.state.description,
+      description: this.state.voucher,
+      }).then(function(){
+      window.location.href = "./";
     })
-
-    console.log(this.props)
   };
 
   render() {
@@ -89,19 +92,34 @@ class InsertOffer extends Component {
                 value={this.state.discountedAmount}
                 onChange={this.handleChange('discountedAmount')}
                 InputProps={{
-                  startAdornment: <InputAdornment position="end">€</InputAdornment>,
+                  startAdornment: <InputAdornment position="start">€</InputAdornment>,
                 }}
               />
-            <FormControl>
-                <InputLabel htmlFor="adornment-amount">Original Price (optional)</InputLabel>
-                <Input
-                  id="original-amount"
-                  value = {this.state.originalAmount}
-                  onChange={this.handleChange('originalAmount')}
-                  startAdornment={<InputAdornment position="start">€</InputAdornment>}
-                  variant="outlined"
-                />
-              </FormControl>
+              <TextField
+                id="discounted-amount"
+                variant="outlined"
+                label="Original Price"
+                value={this.state.originalAmount}
+                onChange={this.handleChange('originalAmount')}
+                InputProps={{
+                  startAdornment: <InputAdornment position="start">€</InputAdornment>,
+                }}
+              />
+
+              <Divider />
+
+              <TextField
+                id="voucher"
+                label="Voucher code (optional)"
+                onChange={this.handleChange('voucher')}
+                margin="normal"
+                className="full-width"
+                variant="outlined"
+              />
+
+            <Divider />
+
+
             <Button variant="contained" href="./">
               Cancel
             </Button>

@@ -1,1 +1,1 @@
-// Only conatains environemnr variables
+// Only conatains environment variables

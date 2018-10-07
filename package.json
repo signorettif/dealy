@@ -1,8 +1,9 @@
 {
-  "name": "react-redux-firebase",
+  "name": "dealy",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.1.2",
     "firebase": "^5.5.3",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",

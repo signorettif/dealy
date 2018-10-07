@@ -17,39 +17,29 @@ class ToDoListItem extends Component {
     addComment(offerToCommentId);
   };
 
+  componentDidMount () {
+    console.log(this.props)
+  }
+
   render() {
     const { offerId, offer } = this.props;
 
-    const styles = {
-      card: {
-        width: 600,
-        margin: '10px auto',
-      },
-      button: {
-        margin: 'auto 5px auto auto',
-      },
-      title: {
-        fontSize: 20,
-      },
-    };
-
 
     return (
-      <Card  style={styles.card}>
+      <Card>
         <CardContent>
-          <Typography variant="headline" component="h2" style={styles.title}>{offer.title}{" "}{offer.description}{" "}</Typography>
+          <Typography variant="headline" component="h2">{offer.title}{" "}{offer.description}{" "}</Typography>
               <CardActions>
                 <Button
                   onClick={() => this.handleCommentClick(offerId)}
                   variant="outlined" color="secondary"
-                  style={styles.button}
                 >
                   Commenta
                 </Button>
                 <Button
                   onClick={() => this.handleViewClick(offerId)}
                   variant="outlined" color="primary"
-                  style={styles.button}
+                  href={"./offer/" + offerId} 
                 >
                   Scopri
                 </Button>

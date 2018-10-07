@@ -12,11 +12,6 @@ class ToDoListItem extends Component {
     addComment(offerToCommentId);
   };
 
-  handleViewClick = offerToCommentId => {
-    const { addComment } = this.props;
-    addComment(offerToCommentId);
-  };
-
   componentDidMount () {
     console.log(this.props)
   }
@@ -37,9 +32,8 @@ class ToDoListItem extends Component {
                   Commenta
                 </Button>
                 <Button
-                  onClick={() => this.handleViewClick(offerId)}
                   variant="outlined" color="primary"
-                  href={"./offer/" + offerId} 
+                  href={"./offer/" + offerId}
                 >
                   Scopri
                 </Button>

@@ -10,12 +10,7 @@ export const addOffer = newOffer => async dispatch => {
 
 // Add comment to the offer
 export const addComment = addCommentOfferId => async dispatch => {
-  offersRef.child(addCommentOfferId).remove();
-};
-
-// Add comment to the offer
-export const viewOfferPage = addCommentOfferId => async dispatch => {
-
+  //offersRef.child(addCommentOfferId).remove();
 };
 
 // Listen for changes and if there is any, fetch the data

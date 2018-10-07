@@ -17,7 +17,7 @@ export const addComment = addCommentOfferId => async dispatch => {
 export const getOfferById = childId => async dispatch => {
   offersRef.child(childId).on("value", snapshot => {
     dispatch({
-      type: FETCH_OFFERS,
+      type: FETCH_OFFER,
       payload: snapshot.val()
     });
   });

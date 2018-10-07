@@ -7,7 +7,7 @@
 /coverage
 
 #config private keys
-/config/dev.js
+/src/config/dev.js
 
 # production
 /build

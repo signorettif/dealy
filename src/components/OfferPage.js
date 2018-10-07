@@ -8,15 +8,15 @@ import "../styles/offers.scss"
 class OfferPage extends Component {
 
   componentWillMount() {
-    console.log(this.props.match.params.title)
+    console.log(this.props.match.params.offerId)
   }
 
   render() {
 
-    
+
     return (
     <div></div>
-      
+
     );
 
   }

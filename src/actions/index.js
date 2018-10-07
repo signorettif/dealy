@@ -3,7 +3,7 @@
 import { authRef, provider, offersRef } from "../config/firebase";
 import { FETCH_OFFERS, FETCH_USER } from "./types";
 
-// Add new oofer
+// Add new offer
 export const addOffer = newOffer => async dispatch => {
   offersRef.push().set(newOffer);
 };
@@ -11,6 +11,11 @@ export const addOffer = newOffer => async dispatch => {
 // Add comment to the offer
 export const addComment = addCommentOfferId => async dispatch => {
   offersRef.child(addCommentOfferId).remove();
+};
+
+// Add comment to the offer
+export const viewOfferPage = addCommentOfferId => async dispatch => {
+
 };
 
 // Listen for changes and if there is any, fetch the data

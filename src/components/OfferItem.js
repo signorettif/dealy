@@ -6,13 +6,19 @@ import { addComment } from "../actions";
 import { CardContent, CardActions, Typography, Button, Card } from "@material-ui/core";
 
 class ToDoListItem extends Component {
-  handleCompleteClick = completeToDoId => {
+  //Currently a placeholder
+  handleCommentClick = offerToCommentId => {
     const { addComment } = this.props;
-    addComment(completeToDoId);
+    addComment(offerToCommentId);
+  };
+
+  handleViewClick = offerToCommentId => {
+    const { addComment } = this.props;
+    addComment(offerToCommentId);
   };
 
   render() {
-    const { todoId, todo } = this.props;
+    const { offerId, offer } = this.props;
 
     const styles = {
       card: {
@@ -31,14 +37,21 @@ class ToDoListItem extends Component {
     return (
       <Card  style={styles.card}>
         <CardContent>
-          <Typography variant="headline" component="h2" style={styles.title}>{todo.title}{" "}</Typography>
+          <Typography variant="headline" component="h2" style={styles.title}>{offer.title}{" "}{offer.description}{" "}</Typography>
               <CardActions>
                 <Button
-                  onClick={() => this.handleCompleteClick(todoId)}
+                  onClick={() => this.handleCommentClick(offerId)}
+                  variant="outlined" color="secondary"
+                  style={styles.button}
+                >
+                  Commenta
+                </Button>
+                <Button
+                  onClick={() => this.handleViewClick(offerId)}
                   variant="outlined" color="primary"
                   style={styles.button}
                 >
-                  done
+                  Scopri
                 </Button>
               </CardActions>
         </CardContent>

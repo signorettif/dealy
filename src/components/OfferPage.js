@@ -3,23 +3,30 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import { authRef, provider, offersRef } from "../config/firebase";
 import * as actions from "../actions";
-
+import OfferItem from "./OfferItem";
 import {Card, CardContent, Typography, CardMedia } from '@material-ui/core';
 import "../styles/offers.scss"
 
 class OfferPage extends Component {
 
-  componentDidMount() {
+  componentWillMount() {
     const {offerId} = this.props.match.params;
-    const { getOfferById } = this.props;
-    console.log(getOfferById(offerId))
+    this.props.getOfferById(offerId)  
+  }
+
+
+  componentDidMount() {    
+
   }
 
   render() {
-const {offerId} = this.props.match.params;
+    const {offerId} = this.props.match.params;
+    const { data } = this.props;
 
     return(
-      <h3>{offerId}</h3>
+      <h3>{offerId} <br />
+      {data.description}
+      </h3>
     )
 
   }

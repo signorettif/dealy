@@ -1,7 +1,7 @@
 // This is the entry point for the actions module and contains 3 actions
 
 import { authRef, provider, offersRef } from "../config/firebase";
-import { FETCH_OFFERS, FETCH_USER } from "./types";
+import { FETCH_OFFERS, FETCH_USER, FETCH_OFFER } from "./types";
 
 // Add new offer
 export const addOffer = newOffer => async dispatch => {
@@ -14,9 +14,10 @@ export const addComment = addCommentOfferId => async dispatch => {
 };
 
 // Add comment to the offer
-export const getOfferById = offerId => dispatch => {
-  offersRef.child(offerId).on("value", snapshot => {
+export const getOfferById = childId => async dispatch => {
+  offersRef.child(childId).on("value", snapshot => {
     dispatch({
+      type: FETCH_OFFERS,
       payload: snapshot.val()
     });
   });

@@ -3,6 +3,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { completeToDo } from "../actions";
+import { CardContent, CardActions, Typography, Button, Card } from "@material-ui/core";
 
 class ToDoListItem extends Component {
   handleCompleteClick = completeToDoId => {
@@ -12,18 +13,36 @@ class ToDoListItem extends Component {
 
   render() {
     const { todoId, todo } = this.props;
+
+    const styles = {
+      card: {
+        width: 600,
+        margin: '10px auto',
+      },
+      button: {
+        margin: 'auto 5px auto auto',
+      },
+      title: {
+        fontSize: 20,
+      },
+    };
+
+
     return (
-      <div key="toDoName" className="col s10 offset-s1 to-do-list-item teal">
-        <h4>
-          {todo.title}{" "}
-          <span
-            onClick={() => this.handleCompleteClick(todoId)}
-            className="complete-todo-item waves-effect waves-light teal lighten-5 teal-text text-darken-4 btn"
-          >
-            <i className="large material-icons">done</i>
-          </span>
-        </h4>
-      </div>
+      <Card  style={styles.card}>
+        <CardContent>
+          <Typography variant="headline" component="h2" style={styles.title}>{todo.title}{" "}</Typography>
+              <CardActions>
+                <Button 
+                  onClick={() => this.handleCompleteClick(todoId)}
+                  variant="outlined" color="primary"
+                  style={styles.button}
+                >
+                  done
+                </Button>
+              </CardActions>
+        </CardContent>
+      </Card>
     );
   }
 }

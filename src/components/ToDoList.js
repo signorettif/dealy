@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import * as actions from "../actions";
 import ToDoListItem from "./ToDoListItem";
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
 class ToDoList extends Component {
   state = {
@@ -47,6 +49,7 @@ class ToDoList extends Component {
 
   renderToDos() {
     const { data } = this.props;
+
     const toDos = _.map(data, (value, key) => {
       return <ToDoListItem key={key} todoId={key} todo={value} />;
     });
@@ -72,25 +75,35 @@ class ToDoList extends Component {
 
   render() {
     const { addFormVisible } = this.state;
+
+    const styles = {
+      button: {
+        display: 'block',
+        margin: 'auto'
+      },
+    }
+
+    
     return (
-      <div className="to-do-list-container">
-        <div className="row">
+      <Grid container spacing={16}>
+        <Grid item xs={12}>
           {this.renderAddForm()}
           {this.renderToDos()}
-        </div>
-        <div className="fixed-action-btn">
-          <button
+        </Grid>
+        <Grid item xs={12}>
+          <Button
             onClick={() => this.setState({ addFormVisible: !addFormVisible })}
             className="btn-floating btn-large teal darken-4"
+            style = {styles.button}
           >
             {addFormVisible ? (
-              <i className="large material-icons">close</i>
+              <span>close</span>
             ) : (
-              <i className="large material-icons">add</i>
+              <span>add</span>
             )}
-          </button>
-        </div>
-      </div>
+          </Button>
+        </Grid>
+      </Grid>
     );
   }
 }

@@ -15,8 +15,8 @@ class InsertOffer extends Component {
     discountedAmount: '',
     description: '',
     voucher:'',
-    likesCount: 0,
-    likes: [],
+    hotCount: 0,
+    coldCount: 0,
   };
 
   componentWillMount() {
@@ -43,8 +43,8 @@ class InsertOffer extends Component {
       originalAmount: this.state.originalAmount,
       description: this.state.description,
       voucher: this.state.voucher,
-      likesCount: this.state.likesCount,
-      likes: this.state.likes,
+      hotCount: this.state.hotCount,
+      coldCount: this.state.coldCount,
       }).then(function(){
       window.location.href = "./";
     })

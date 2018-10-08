@@ -13,22 +13,84 @@ class ToDoListItem extends Component {
     addComment(offerToCommentId);
   };
 
-  increaseLike = offerId => {
-    //const { increaseLike } = this.props;
-    //increaseLike(offerId);
+
+  //Likes handling
+
+  handleTemperature = (offerId, direction) => {
 
     const { offer } = this.props;
+
+    var modifiedHotCount = offer.hotCount;
+    var modifiedColdCount = offer.coldCount;
+    var hotArray = offer.hotList;
+    var coldArray = offer.coldList;
+    var array = []
+
+    switch(direction){
+      case 'hot':
+        modifiedHotCount = modifiedHotCount + 1;
+        if (!hotArray){
+          hotArray =[]
+        }
+        hotArray.push(authRef.currentUser.uid);
+
+        if (this.hasCold()){
+          coldArray.splice(coldArray.indexOf(authRef.currentUser.uid), 1)
+        }
+        break;
+
+
+      case 'cold':
+        modifiedColdCount = modifiedColdCount - 1;
+        if (!coldArray){
+          coldArray =[]
+        }
+        coldArray.push(authRef.currentUser.uid);
+
+        if (this.hasHot()){
+          hotArray.splice(hotArray.indexOf(authRef.currentUser.uid), 1)
+        }
+
+        break;
+    };
+
     offersRef.child(offerId).update({ 
-      likesCount: (offer.likesCount + 1)
+      hotCount: modifiedHotCount,
+      coldCount: modifiedColdCount,
+      hotList: hotArray,
+      coldList: coldArray
     })
   };
 
+  hasHot(){
+    const { offer } = this.props;
+    if (!offer.hotList){
+      offer.hotList = []
+    };
+
+    return offer.hotList.includes(authRef.currentUser.uid);
+  }
+
+  hasCold(){
+    const { offer } = this.props;
+    if (!offer.coldList){
+      offer.coldList = []
+    };
+
+    return offer.coldList.includes(authRef.currentUser.uid);
+  }
+
+  componentWillMount () {
+    const { offer } = this.props;
+  }
+
   componentDidMount () {
-    console.log(this.props)
+    
   }
 
   render() {
     const { offerId, offer } = this.props;
+    var likesCount = offer.coldCount + offer.hotCount;
 
 
     return (
@@ -50,8 +112,12 @@ class ToDoListItem extends Component {
                 </Button>
               </CardActions>
         </CardContent>
-        <p>{offer.likesCount}</p>
-        <Button variant="contained" color="primary" type="submit" onClick={() => this.increaseLike(offerId)}>
+        <p>{likesCount}</p>
+        
+        <Button variant="contained" disabled={this.hasCold()}  color="primary" type="submit" onClick={() => this.handleTemperature(offerId, "cold")}>
+          Decrease
+        </Button>
+        <Button variant="contained" disabled={this.hasHot()}  color="primary" type="submit" onClick={() => this.handleTemperature(offerId, "hot")}>
           Increase
         </Button>
       </Card>

@@ -10,7 +10,7 @@ class InsertOffer extends Component {
 
   state = {
     title: '',
-    link:'',
+    link: '',
     originalAmount: '',
     discountedAmount: '',
     description: '',
@@ -43,8 +43,10 @@ class InsertOffer extends Component {
       originalAmount: this.state.originalAmount,
       description: this.state.description,
       voucher: this.state.voucher,
-      hotCount: this.state.hotCount,
-      coldCount: this.state.coldCount,
+      time: new Date().toUTCString(),
+      hotCount: 1,
+      coldCount: 0,
+      hotList = [authRef.currentUser.uid]
       }).then(function(){
       window.location.href = "./";
     })

@@ -15,7 +15,6 @@ class ToDoListItem extends Component {
 
 
   //Likes handling
-
   handleTemperature = (offerId, direction) => {
 
     const { offer } = this.props;
@@ -54,7 +53,7 @@ class ToDoListItem extends Component {
         break;
     };
 
-    offersRef.child(offerId).update({ 
+    offersRef.child(offerId).update({
       hotCount: modifiedHotCount,
       coldCount: modifiedColdCount,
       hotList: hotArray,
@@ -85,7 +84,7 @@ class ToDoListItem extends Component {
   }
 
   componentDidMount () {
-    
+
   }
 
   render() {
@@ -113,7 +112,7 @@ class ToDoListItem extends Component {
               </CardActions>
         </CardContent>
         <p>{likesCount}</p>
-        
+
         <Button variant="contained" disabled={this.hasCold()}  color="primary" type="submit" onClick={() => this.handleTemperature(offerId, "cold")}>
           Decrease
         </Button>

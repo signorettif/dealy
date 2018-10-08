@@ -39,22 +39,22 @@ class OfferPage extends Component {
           title="Contemplative Reptile"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography variant="h5" component="h2" href={data.link}>
             {data.title}
+          </Typography>
+          <Typography gutterBottom color="textSecondary">
+          {data.discountedAmount} {data.originalAmount} {data.time}
           </Typography>
           <Typography component="p">
             {data.description}
           </Typography>
-          <Typography color="textSecondary">
-          {data.discountedAmount} {data.originalAmount}
-          </Typography>
         </CardContent>
       <CardActions>
         <Button size="small" color="primary">
-          VOTA
+          DECRESCI
         </Button>
         <Button size="small" color="primary">
-          CONDIVIDI
+          CRESCI
         </Button>
       </CardActions>
     </Card>

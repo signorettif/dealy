@@ -18,7 +18,7 @@ class InsertOffer extends Component {
   };
 
   componentWillMount() {
-    
+
   }
 
   handleChange = prop => event => {
@@ -32,6 +32,7 @@ class InsertOffer extends Component {
     // addToDo({ title: addFormValue });
     // this.setState({ addFormValue: "" });
 
+    // Aggiungere a questa finzione la data di aggiunta
     const {addOffer} = this.props;
       addOffer({
       title: this.state.title,
@@ -39,7 +40,7 @@ class InsertOffer extends Component {
       discountedAmount: this.state.discountedAmount,
       originalAmount: this.state.originalAmount,
       description: this.state.description,
-      description: this.state.voucher,
+      voucher: this.state.voucher,
       }).then(function(){
       window.location.href = "./";
     })
@@ -47,7 +48,7 @@ class InsertOffer extends Component {
 
   render() {
 
-    
+
     return (
       <Grid container spacing={24}>
         <Grid item xs={6}>
@@ -136,7 +137,7 @@ class InsertOffer extends Component {
         <Grid item xs={12}>
 
         </Grid>
-        
+
       </Grid>
     );
 

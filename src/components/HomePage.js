@@ -8,12 +8,12 @@ import "../styles/offers.scss"
 class HomePage extends Component {
 
   componentWillMount() {
-    
+
   }
 
   render() {
 
-    
+
     return (
     <div>
       <span>Homepage</span>

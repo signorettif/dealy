@@ -5,7 +5,7 @@ import _ from "lodash";
 import * as actions from "../actions";
 
 import withStyles from '@material-ui/core/styles/withStyles';
-import { CssBaseline, Paper, Typography, List, ListItemText, ListItem } from '@material-ui/core';
+import { CssBaseline, Card, CardContent, CardMedia, CardActions, Typography, Button } from '@material-ui/core';
 import "../styles/offerPage.scss"
 
 const styles = theme => ({
@@ -32,20 +32,32 @@ class OfferPage extends Component {
     const { data } = this.props;
 
     return(
-      <React.Fragment>
-          <CssBaseline />
-          <Paper>
-            <Typography variant="h4" align="center">
-              {data.title}
-            </Typography>
-            <List disablePadding>
-              <ListItem>
-                <ListItemText primary={data.description} />
-                <ListItemText primary={data.discountedAmount} secondary={data.originalAmount}/>
-              </ListItem>
-            </List>
-        </Paper>
-      </React.Fragment>
+      <Card className="">
+        <CardMedia
+          className="Card-img"
+          image="/static/images/cards/contemplative-reptile.jpg"
+          title="Contemplative Reptile"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+            {data.title}
+          </Typography>
+          <Typography component="p">
+            {data.description}
+          </Typography>
+          <Typography color="textSecondary">
+          {data.discountedAmount} {data.originalAmount}
+          </Typography>
+        </CardContent>
+      <CardActions>
+        <Button size="small" color="primary">
+          VOTA
+        </Button>
+        <Button size="small" color="primary">
+          CONDIVIDI
+        </Button>
+      </CardActions>
+    </Card>
     )
 
   }

@@ -24,7 +24,7 @@ class OfferPage extends Component {
 
     return(
           <Paper>
-            <Typography variant="'h1'">
+            <Typography variant="h1">
               {data.title}
               {data.description}
               {data.discountedAmount}

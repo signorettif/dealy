@@ -2,14 +2,25 @@
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addComment } from "../actions";
+import * as actions from "../actions";
 import { CardContent, CardActions, Typography, Button, Card } from "@material-ui/core";
+import { authRef, provider, offersRef } from "../config/firebase";
 
 class ToDoListItem extends Component {
   //Currently a placeholder
   handleCommentClick = offerToCommentId => {
     const { addComment } = this.props;
     addComment(offerToCommentId);
+  };
+
+  increaseLike = offerId => {
+    //const { increaseLike } = this.props;
+    //increaseLike(offerId);
+
+    const { offer } = this.props;
+    offersRef.child(offerId).update({ 
+      likesCount: (offer.likesCount + 1)
+    })
   };
 
   componentDidMount () {
@@ -39,10 +50,14 @@ class ToDoListItem extends Component {
                 </Button>
               </CardActions>
         </CardContent>
+        <p>{offer.likesCount}</p>
+        <Button variant="contained" color="primary" type="submit" onClick={() => this.increaseLike(offerId)}>
+          Increase
+        </Button>
       </Card>
     );
   }
 }
 
 // The connect method takes two arguments: the function which is taking the data from  store and the the object containing actions.
-export default connect(null, { addComment })(ToDoListItem);
+export default connect(null, actions)(ToDoListItem);

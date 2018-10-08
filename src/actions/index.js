@@ -8,9 +8,14 @@ export const addOffer = newOffer => async dispatch => {
   offersRef.push().set(newOffer);
 };
 
+// Increase Likes on Posts
+export const increaseLikes = offerId => async dispatch => {
+  //offersRef.push().set(offerId);
+};
+
 // Add comment to the offer
 export const addComment = addCommentOfferId => async dispatch => {
-  //offersRef.child(addCommentOfferId).remove();
+  offersRef.child(addCommentOfferId).remove();
 };
 
 // Add comment to the offer

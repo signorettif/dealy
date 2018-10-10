@@ -1,12 +1,13 @@
-$primary-color: #eee;
+$light-grey: #f9f9f9;
+$dark-grey: #e8e8e8;
 
 body{
-    background: $primary-color;
-    font-size: 40px;
+    background: $light-grey;
+    font-size: 12px;
 }
 
 .container{
-    max-width: 1024px;
+    max-width: 1100px;
     padding: 20px;
     background: white;
     margin: auto;

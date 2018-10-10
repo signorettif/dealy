@@ -34,9 +34,8 @@ class OfferPage extends Component {
     return(
       <Card className="">
         <CardMedia
-          className="Card-img"
-          image="/static/images/cards/contemplative-reptile.jpg"
-          title="Contemplative Reptile"
+          className="card-img"
+          image={data.downloadURL}
         />
         <CardContent>
           <Typography variant="h5" component="h2" href={data.link}>

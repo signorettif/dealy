@@ -5,49 +5,16 @@ import * as actions from "../actions";
 import OfferItem from "./OfferItem";
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import Header from "./commons/Header";
 
 class OffersList extends Component {
   state = {
-    addFormVisible: false,
-    addFormValue: ""
+
   };
 
-  handleInputChange = event => {
-    this.setState({ addFormValue: event.target.value });
-  };
-
-  handleFormSubmit = event => {
-    const { addFormValue } = this.state;
-    const { addOffers } = this.props;
-    event.preventDefault();
-    addOffers({ title: addFormValue });
-    this.setState({ addFormValue: "" });
-  };
-
-  renderAddForm = () => {
-    const { addFormVisible, addFormValue } = this.state;
-    if (addFormVisible) {
-      return (
-        <div id="todo-add-form" className="col s10 offset-s1">
-          <form onSubmit={this.handleFormSubmit}>
-            <div className="input-field">
-              <i className="material-icons prefix">note_add</i>
-              <input
-                value={addFormValue}
-                onChange={this.handleInputChange}
-                id="toDoNext"
-                type="text"
-              />
-              <label htmlFor="toDoNext">What To Do Next</label>
-            </div>
-          </form>
-        </div>
-      );
-    }
-  };
 
   // Renders the Offers list
-  renderOfferss() {
+  renderOffers() {
     const { data } = this.props;
 
     const Offers = _.map(data, (value, key) => {
@@ -59,36 +26,33 @@ class OffersList extends Component {
     }
 
     return (
-      <div className="col s10 offset-s1 center-align">
-        <h4>There are currently no offers outstanding</h4>
-        <p>Start by clicking add button in the bottom of the screen</p>
-      </div>
+      null
     );
   }
 
+  
   componentWillMount() {
     this.props.fetchOffers();
   }
 
   render() {
-    const { addFormVisible } = this.state;
-
-
     return (
-      <Grid container spacing={16}>
-        <Grid item xs={12}>
-          {this.renderAddForm()}
-          {this.renderOfferss()}
+      <div>
+        <Header></Header>
+        <Grid container spacing={16}>
+          <Grid item xs={12}>
+            {this.renderOffers()}
+          </Grid>
+          <Grid item xs={12}>
+            <Button
+              href="./new-offer"
+              className="btn-floating btn-large teal darken-4"
+            >
+              <span>Add new offer</span>
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <Button
-            href="./new-offer"
-            className="btn-floating btn-large teal darken-4"
-          >
-            <span>Add new offer</span>
-          </Button>
-        </Grid>
-      </Grid>
+      </div>
     );
   }
 }

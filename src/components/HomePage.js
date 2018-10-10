@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
 import * as actions from "../actions";
+import Header from "./commons/Header"
 import {Card, CardContent, Typography, CardMedia } from '@material-ui/core';
 import "../styles/offers.scss"
 
@@ -16,6 +17,7 @@ class HomePage extends Component {
 
     return (
     <div>
+      <Header></Header>
       <span>Homepage</span>
 
       <Card className="offer">

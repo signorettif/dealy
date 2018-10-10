@@ -4,6 +4,7 @@ import ReduxThunk from 'redux-thunk';
 import _ from "lodash";
 import * as actions from "../actions";
 import {FormControl, InputLabel, Input, InputAdornment, TextField, Button, Grid, Divider, Chip} from '@material-ui/core';
+import { authRef, provider, offersRef, storageRef } from "../config/firebase";
 import "../styles/insertOffer.scss"
 
 class InsertOffer extends Component {
@@ -17,7 +18,52 @@ class InsertOffer extends Component {
     voucher:'',
     hotCount: 0,
     coldCount: 0,
+    downloadURL: '',
+
+
+
+    progress:'0%',
   };
+
+  handleFile =(e) => {
+    const imageFile = e.target.files[0]
+  
+    this.uploadFile(imageFile, result => {
+  
+      if (result.progress) {
+        // Handle progress
+        this.setState({progress: (result.progress+'%')});
+        return;
+      }
+  
+      if (result.downloadURL) {
+        this.setState({downloadURL: result.downloadURL});
+
+        return;
+      }
+  
+      if (result.error) {
+        // Handle error
+        console.log(result.error);
+      }
+    });
+  };
+  
+  uploadFile = (imageFile, callback) => {
+    const fileName = imageFile.name
+    const uploadTask = storageRef.child('/offer-images/'+ fileName).put(imageFile)
+  
+    uploadTask.on('state_changed', snapshot => {
+      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      callback({ progress });
+    }, error => {
+      callback({ error });
+    }, () => {
+      uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {;
+        callback({ downloadURL });
+      });
+    });
+  } 
 
   componentWillMount() {
 
@@ -25,6 +71,7 @@ class InsertOffer extends Component {
 
   handleChange = prop => event => {
     this.setState({ [prop]: event.target.value });
+    console.log(this.state)
   };
 
   handleFormSubmit = event => {
@@ -46,7 +93,8 @@ class InsertOffer extends Component {
       time: new Date().toUTCString(),
       hotCount: 1,
       coldCount: 0,
-      hotList = [authRef.currentUser.uid]
+      hotList: [authRef.currentUser.uid],
+      downloadURL: this.state.downloadURL
       }).then(function(){
       window.location.href = "./";
     })
@@ -133,7 +181,22 @@ class InsertOffer extends Component {
             <Button variant="contained" color="primary" type="submit">
               Save
             </Button>
+
+            <input
+              accept="image/*"
+              id="outlined-button-file"
+              type="file"
+              style={{display: 'none'}}
+              onChange={(e)=>this.handleFile(e)}
+            />
+            <label htmlFor="outlined-button-file">
+              <Button variant="outlined" component="span">
+                Upload
+              </Button>
+            </label>
           </form>
+
+          <div className="progress-bar"><span style={{width: this.state.progress}}></span></div>
         </Grid>
 
         <Grid item xs={6}>
@@ -141,7 +204,7 @@ class InsertOffer extends Component {
         </Grid>
 
         <Grid item xs={12}>
-
+                
         </Grid>
 
       </Grid>

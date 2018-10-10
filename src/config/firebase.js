@@ -6,6 +6,7 @@ import { FirebaseConfig } from "../config/keys";
 firebase.initializeApp(FirebaseConfig);
 
 const databaseRef = firebase.database().ref();
+export const storageRef = firebase.storage().ref()
 export const offersRef = databaseRef.child("offers");
 export const authRef = firebase.auth();
 export const provider = new firebase.auth.GoogleAuthProvider();

@@ -8,19 +8,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { CssBaseline, Card, CardContent, CardMedia, CardActions, Typography, Button } from '@material-ui/core';
 import "../styles/offerPage.scss"
 
-const styles = theme => ({
-  paper: {
-      marginTop: theme.spacing.unit * 3,
-      marginBottom: theme.spacing.unit * 3,
-      padding: theme.spacing.unit * 2,
-      [theme.breakpoints.up(600 + theme.spacing.unit * 3 * 2)]: {
-        marginTop: theme.spacing.unit * 6,
-        marginBottom: theme.spacing.unit * 6,
-        padding: theme.spacing.unit * 3,
-      },
-    }
-});
-
 class OfferPage extends Component {
 
   componentWillMount() {
@@ -36,7 +23,9 @@ class OfferPage extends Component {
         <CardMedia
           className="card-img"
           image={data.downloadURL}
-        />
+        >
+          <img src={data.downloadURL} style={{visibility: 'hidden'}} />
+        </CardMedia>
         <CardContent>
           <Typography variant="h5" component="h2" href={data.link}>
             {data.title}
@@ -69,6 +58,5 @@ const mapStateToProps = ({ data }) => {
 };
 
 export default compose(
-  withStyles(styles),
   connect(mapStateToProps, actions)
 )(OfferPage)

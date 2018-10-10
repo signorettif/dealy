@@ -1,4 +1,9 @@
 .card-img{
-    width: 200px;
-    height: 100px;
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+
+    img{
+      max-width: 100%
+    }
 }

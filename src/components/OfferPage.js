@@ -24,6 +24,7 @@ class OfferPage extends Component {
           className="card-img"
           image={data.downloadURL}
         >
+          //Questo da la dimensione al CardMedia
           <img src={data.downloadURL} style={{visibility: 'hidden'}} />
         </CardMedia>
         <CardContent>

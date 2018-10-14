@@ -5,7 +5,6 @@ import * as actions from "../actions";
 import OfferItem from "./OfferItem";
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import Header from "./commons/Header";
 
 class OffersList extends Component {
   state = {
@@ -30,29 +29,30 @@ class OffersList extends Component {
     );
   }
 
-  
+
   componentWillMount() {
     this.props.fetchOffers();
   }
 
   render() {
     return (
-      <div>
-        <Header></Header>
-        <Grid container spacing={16}>
-          <Grid item xs={12}>
-            {this.renderOffers()}
+      <React.Fragment>
+        <main>
+          <Grid container spacing={16}>
+            <Grid item xs={12}>
+              {this.renderOffers()}
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                href="./new-offer"
+                className="btn-floating btn-large teal darken-4"
+              >
+                <span>Add new offer</span>
+              </Button>
+            </Grid>
           </Grid>
-          <Grid item xs={12}>
-            <Button
-              href="./new-offer"
-              className="btn-floating btn-large teal darken-4"
-            >
-              <span>Add new offer</span>
-            </Button>
-          </Grid>
-        </Grid>
-      </div>
+        </main>
+      </React.Fragment>
     );
   }
 }

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Header from "./components/commons/Header"
 import OffersList from "./components/OffersList";
 import HomePage from "./components/HomePage";
 import InsertOffer from "./components/InsertOffer";
@@ -16,15 +17,18 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
-        <div className="container">
-          <Route exact path="/" component={SignIn} />
-          <Route path="/app" component={requireAuth(OffersList)} />
-          <Route path="/home" component={HomePage} />
-          <Route path="/new-offer" component={InsertOffer} />
-          <Route path="/offer/:offerId" component={OfferPage} />
-        </div>
-      </BrowserRouter>
+        <BrowserRouter>
+          <React.Fragment>
+            <Header />
+            <div className="container">
+              <Route exact path="/" component={SignIn} />
+              <Route path="/app" component={requireAuth(OffersList)} />
+              <Route path="/home" component={HomePage} />
+              <Route path="/new-offer" component={InsertOffer} />
+              <Route path="/offer/:offerId" component={OfferPage} />
+            </div>
+          </React.Fragment>
+        </BrowserRouter>
     );
   }
 }

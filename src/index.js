@@ -6,14 +6,18 @@ import reduxThunk from "redux-thunk";
 import reducers from "./reducers";
 import App from "./App";
 import * as serviceWorker from './serviceWorker';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import './styles/main.scss';
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <React.Fragment>
+    <CssBaseline />
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.Fragment>,
   document.getElementById("root")
 );
 

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Header from "./components/commons/Header"
 import OffersList from "./components/OffersList";
-import HomePage from "./components/HomePage";
 import InsertOffer from "./components/InsertOffer";
 import SignIn from "./components/SignIn";
 import requireAuth from "./components/auth/requireAuth";
@@ -23,7 +22,6 @@ class App extends Component {
             <div className="container">
               <Route exact path="/" component={SignIn} />
               <Route path="/app" component={requireAuth(OffersList)} />
-              <Route path="/home" component={HomePage} />
               <Route path="/new-offer" component={InsertOffer} />
               <Route path="/offer/:offerId" component={OfferPage} />
             </div>

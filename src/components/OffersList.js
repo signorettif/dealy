@@ -3,8 +3,10 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import * as actions from "../actions";
 import OfferItem from "./OfferItem";
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
+import {Button, Grid } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
+
+import "../styles/offersList.scss"
 
 class OffersList extends Component {
   state = {
@@ -42,16 +44,11 @@ class OffersList extends Component {
             <Grid item xs={12}>
               {this.renderOffers()}
             </Grid>
-            <Grid item xs={12}>
-              <Button
-                href="./new-offer"
-                className="btn-floating btn-large teal darken-4"
-              >
-                <span>Add new offer</span>
-              </Button>
-            </Grid>
           </Grid>
         </main>
+        <Button href="./new-offer" variant="fab" color="primary" aria-label="Add" className="aggiungiBottone" >
+          <AddIcon />
+        </Button>
       </React.Fragment>
     );
   }

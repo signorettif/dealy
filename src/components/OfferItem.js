@@ -19,18 +19,19 @@ class ToDoListItem extends Component {
 
     const { offer } = this.props;
 
-    var modifiedHotCount = offer.hotCount;
-    var modifiedColdCount = offer.coldCount;
     var hotArray = offer.hotList;
     var coldArray = offer.coldList;
-    var array = []
+
+    if (!hotArray){
+      hotArray =[]
+    }
+
+    if (!coldArray){
+      coldArray =[]
+    }
 
     switch(direction){
       case 'hot':
-        modifiedHotCount = modifiedHotCount + 1;
-        if (!hotArray){
-          hotArray =[]
-        }
         hotArray.push(authRef.currentUser.uid);
 
         if (this.hasCold()){
@@ -40,10 +41,6 @@ class ToDoListItem extends Component {
 
 
       case 'cold':
-        modifiedColdCount = modifiedColdCount - 1;
-        if (!coldArray){
-          coldArray =[]
-        }
         coldArray.push(authRef.currentUser.uid);
 
         if (this.hasHot()){
@@ -54,8 +51,7 @@ class ToDoListItem extends Component {
     };
 
     offersRef.child(offerId).update({
-      hotCount: modifiedHotCount,
-      coldCount: modifiedColdCount,
+      heatCount: (hotArray.length - coldArray.length),
       hotList: hotArray,
       coldList: coldArray
     })
@@ -89,7 +85,6 @@ class ToDoListItem extends Component {
 
   render() {
     const { offerId, offer } = this.props;
-    var likesCount = offer.coldCount + offer.hotCount;
 
 
     return (
@@ -111,7 +106,7 @@ class ToDoListItem extends Component {
                 </Button>
               </CardActions>
         </CardContent>
-        <p>{likesCount}</p>
+        <p>{offer.heatCount}</p>
 
         <Button variant="contained" disabled={this.hasCold()}  color="primary" type="submit" onClick={() => this.handleTemperature(offerId, "cold")}>
           Decrease

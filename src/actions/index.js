@@ -27,6 +27,15 @@ export const getOfferById = childId => async dispatch => {
   });
 };
 
+export const getOffersFromDate = date => async dispatch => {
+  offersRef.orderByChild('createdAt').startAt(date).on("value", snapshot => {
+    dispatch({
+      type: FETCH_OFFER,
+      payload: snapshot.val()
+    });
+  });
+};
+
 // Listen for changes and if there is any, fetch the data
 export const fetchOffers = () => async dispatch => {
   offersRef.on("value", snapshot => {

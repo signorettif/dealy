@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import * as actions from "../actions";
 import OfferItem from "./OfferItem";
+import Sidebar from "./Sidebar";
 import {Button, Grid } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
@@ -41,8 +42,11 @@ class OffersList extends Component {
       <React.Fragment>
         <main>
           <Grid container spacing={16}>
-            <Grid item xs={12}>
+            <Grid item xs={8}>
               {this.renderOffers()}
+            </Grid>
+            <Grid item xs={4}>
+              <Sidebar></Sidebar>
             </Grid>
           </Grid>
         </main>

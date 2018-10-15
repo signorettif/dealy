@@ -1,3 +1,11 @@
+@import "variables";
+
 .toolbarTitle{
   flex-grow: 1;
+}
+
+.top{
+  background-color: white !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid $dark-grey;
 }

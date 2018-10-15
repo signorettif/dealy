@@ -3,13 +3,23 @@ import { connect } from "react-redux";
 import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core';
 import { AccountCircle } from '@material-ui/icons'
 import _ from "lodash";
-import * as actions from "../../actions";
+import { signIn } from "../../actions";
 import "../../styles/header.scss"
 
 class Header extends Component {
 
-  componentWillMount() {
-
+  componentWillUpdate(nextProps) {
+    if (nextProps.authenticated) {
+        this.loginButton = <div>
+          <IconButton>
+            <AccountCircle />
+          </IconButton>
+        </div>
+      } else {
+        this.loginButton = <Button color="primary" variant="outlined" onClick={this.props.signIn}>
+          Login
+        </Button>
+      }
   }
 
   render() {
@@ -23,16 +33,7 @@ class Header extends Component {
           </Typography>
           {/* <Button>Più caldi</Button>
           <Button>Nuovi</Button>*/}
-          <Button color="primary" variant="outlined">
-            Login
-          </Button>
-          {true && (
-              <div>
-                <IconButton>
-                  <AccountCircle />
-                </IconButton>
-              </div>
-            )}
+          { this.loginButton }
         </Toolbar>
       </AppBar>
     );
@@ -40,10 +41,8 @@ class Header extends Component {
   }
 }
 
-const mapStateToProps = ({ data }) => {
-  return {
-    data
-  };
-};
+function mapStateToProps(state) {
+  return { authenticated: state.auth };
+}
 
-export default connect(mapStateToProps, actions)(Header);
+export default connect(mapStateToProps, {signIn})(Header);

@@ -3,6 +3,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
+import Emoji from "./commons/Emoji"
 
 import "../styles/sidebar.scss"
 
@@ -20,15 +21,46 @@ class Sidebar extends Component {
     return (
       <div id="sidebar">
         <div className="sidebar-element">
-          <h1>I più caldi di oggi</h1>
+          <h1><Emoji symbol="🔥"/> I più caldi di oggi</h1>
           <div className="hot-today">
-            <div className="top">
-              <span>100</span>
-              <span>12 ore fa</span>
+            <div className="hot-top">
+              <span className="left"><i>-</i>100 &deg;<i>+</i></span>
+              <span className="right">12 ore fa</span>
             </div>
-            <h2>
-              Some awesome title goes here
-            </h2>
+            <div className="hot-title">
+              <img src="/img/offer-placeholder.jpg" />
+              <h2>
+                Some awesome title goes here
+              </h2>
+            </div>
+            <div className="bottom">qui ci vanno i bottoni</div>
+          </div>
+
+          <div className="hot-today">
+            <div className="hot-top">
+              <span className="left"><i>-</i>100 &deg;<i>+</i></span>
+              <span className="right">12 ore fa</span>
+            </div>
+            <div className="hot-title">
+              <img src="/img/offer-placeholder.jpg" />
+              <h2>
+                Some awesome title goes here
+              </h2>
+            </div>
+            <div className="bottom">qui ci vanno i bottoni</div>
+          </div>
+
+          <div className="hot-today">
+            <div className="hot-top">
+              <span className="left"><i>-</i>100 &deg;<i>+</i></span>
+              <span className="right">12 ore fa</span>
+            </div>
+            <div className="hot-title">
+              <img src="/img/offer-placeholder.jpg" />
+              <h2>
+                Some awesome title goes here
+              </h2>
+            </div>
             <div className="bottom">qui ci vanno i bottoni</div>
           </div>
         </div>

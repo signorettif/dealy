@@ -1,0 +1,43 @@
+@import "variables";
+
+#sidebar{
+
+  .sidebar-element{
+    width: 100%;
+    margin-top: 50px;
+    
+    &:first-child{
+      margin-top: 0px;
+    }
+  }
+
+  h1{
+    font-size: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $dark-grey;
+    letter-spacing: 1px;
+    margin-bottom: 0px;
+  }
+
+  .hot-today{
+    padding: 20px 5px;
+    border-bottom: 1px solid $dark-grey;
+
+    .top{
+      border: none;
+    }
+
+    h2{
+      font-size: 12px;
+    }
+  }
+
+  .adv-spot{
+    background-color: white;
+    border: 1px solid $dark-grey;
+    min-height: 50px;
+    border-radius: $border-radius;
+  }
+
+
+}

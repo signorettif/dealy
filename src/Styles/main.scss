@@ -1,14 +1,14 @@
-$light-grey: #f9f9f9;
-$dark-grey: #e8e8e8;
+@import "variables";
 
 body{
     background: $light-grey;
     font-size: 12px;
+    font-family: 'Roboto', sans-serif;
 }
 
 .container{
-    background: white;
-    margin: auto;
+    margin: 20px auto;
+    max-width: 1024px;
 }
 
 .full-width{

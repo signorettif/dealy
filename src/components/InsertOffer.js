@@ -16,8 +16,6 @@ class InsertOffer extends Component {
     discountedAmount: '',
     description: '',
     voucher:'',
-    hotCount: 0,
-    coldCount: 0,
     downloadURL: '',
 
 
@@ -90,9 +88,8 @@ class InsertOffer extends Component {
       originalAmount: this.state.originalAmount,
       description: this.state.description,
       voucher: this.state.voucher,
-      time: new Date().toUTCString(),
-      hotCount: 1,
-      coldCount: 0,
+      createdAt: new Date().getTime(),
+      heatCount: 1,
       hotList: [authRef.currentUser.uid],
       downloadURL: this.state.downloadURL
       }).then(function(){

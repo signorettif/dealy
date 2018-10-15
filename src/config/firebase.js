@@ -10,3 +10,4 @@ export const storageRef = firebase.storage().ref()
 export const offersRef = databaseRef.child("offers");
 export const authRef = firebase.auth();
 export const provider = new firebase.auth.GoogleAuthProvider();
+export const timeRef = firebase.database().ref('/.info/serverTimeOffset');

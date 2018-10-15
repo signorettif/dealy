@@ -1,29 +1,67 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core';
+import {compose} from 'redux';
+import { AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem } from '@material-ui/core';
 import { AccountCircle } from '@material-ui/icons'
 import _ from "lodash";
-import { signIn } from "../../actions";
+import { signIn, signOut } from "../../actions";
+import { authRef } from "../../config/firebase";
+
 import "../../styles/header.scss"
 
 class Header extends Component {
 
-  componentWillUpdate(nextProps) {
-    if (nextProps.authenticated) {
-        this.loginButton = <div>
-          <IconButton>
+  state = {
+    anchorEl: null,
+  };
+
+  handleMenu = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
+  render() {
+    const { anchorEl } = this.state;
+    const open = Boolean(anchorEl);
+
+    if (this.props.authenticated) {
+        this.loginButton =
+        <div>
+          <IconButton
+            aria-owns={open ? 'menu-appbar' : null}
+            aria-haspopup="true"
+            onClick={this.handleMenu}
+            color="inherit"
+          >
             <AccountCircle />
           </IconButton>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={open}
+            onClose={this.handleClose}
+          >
+            <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+            <MenuItem onClick={(event) => {authRef.signOut(); this.handleClose()}}>Sign out</MenuItem>
+          </Menu>
         </div>
       } else {
-        this.loginButton = <Button color="primary" variant="outlined" onClick={this.props.signIn}>
+        this.loginButton =
+        <Button color="primary" variant="outlined" onClick={this.props.signIn}>
           Login
         </Button>
       }
-  }
-
-  render() {
-
 
     return (
       <AppBar position="relative" color="default" className="top">

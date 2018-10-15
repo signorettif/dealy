@@ -5,7 +5,6 @@ import { AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem } from 
 import { AccountCircle } from '@material-ui/icons'
 import _ from "lodash";
 import { signIn, signOut } from "../../actions";
-import { authRef } from "../../config/firebase";
 
 import "../../styles/header.scss"
 
@@ -53,7 +52,7 @@ class Header extends Component {
             onClose={this.handleClose}
           >
             <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-            <MenuItem onClick={(event) => {authRef.signOut(); this.handleClose()}}>Sign out</MenuItem>
+            <MenuItem onClick={(event) => {this.props.signOut(); this.handleClose()}}>Sign out</MenuItem>
           </Menu>
         </div>
       } else {
@@ -83,4 +82,4 @@ function mapStateToProps(state) {
   return { authenticated: state.auth };
 }
 
-export default connect(mapStateToProps, {signIn})(Header);
+export default connect(mapStateToProps, {signIn, signOut})(Header);

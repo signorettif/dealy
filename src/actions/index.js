@@ -1,5 +1,4 @@
 // This is the entry point for the actions module and contains 3 actions
-
 import { authRef, provider, offersRef } from "../config/firebase";
 import { FETCH_OFFERS, FETCH_USER, FETCH_OFFER } from "./types";
 
@@ -69,7 +68,7 @@ export const signOut = () => dispatch => {
   authRef
     .signOut()
     .then(() => {
-     //Nothing to see here
+      this.props.history.push("/")
     })
     .catch(error => {
       console.log(error);

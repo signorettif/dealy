@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import ReduxThunk from 'redux-thunk';
 import _ from "lodash";
 import * as actions from "../actions";
-import {FormControl, InputLabel, Input, InputAdornment, TextField, Button, Grid, Divider, Chip} from '@material-ui/core';
+import {Typography, Paper, FormControl, InputLabel, Input, InputAdornment, TextField, Button, Grid, Divider, Chip} from '@material-ui/core';
 import { authRef, provider, offersRef, storageRef } from "../config/firebase";
 import "../styles/insertOffer.scss"
 
@@ -27,32 +27,32 @@ class InsertOffer extends Component {
 
   handleFile =(e) => {
     const imageFile = e.target.files[0]
-  
+
     this.uploadFile(imageFile, result => {
-  
+
       if (result.progress) {
         // Handle progress
         this.setState({progress: (result.progress+'%')});
         return;
       }
-  
+
       if (result.downloadURL) {
         this.setState({downloadURL: result.downloadURL});
 
         return;
       }
-  
+
       if (result.error) {
         // Handle error
         console.log(result.error);
       }
     });
   };
-  
+
   uploadFile = (imageFile, callback) => {
     const fileName = imageFile.name
     const uploadTask = storageRef.child('/offer-images/'+ fileName).put(imageFile)
-  
+
     uploadTask.on('state_changed', snapshot => {
       var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       callback({ progress });
@@ -63,7 +63,7 @@ class InsertOffer extends Component {
         callback({ downloadURL });
       });
     });
-  } 
+  }
 
   componentWillMount() {
 
@@ -104,11 +104,17 @@ class InsertOffer extends Component {
 
 
     return (
-      <Grid container spacing={24}>
-        <Grid item xs={6}>
-          <form onSubmit={this.handleFormSubmit} xs={6}>
-            <TextField
-              required
+      <Paper id="content">
+        <Typography component="h1" variant="h5">
+          Inserisci una nuova offerta
+        </Typography>
+
+
+        <form onSubmit={this.handleFormSubmit}>
+          <Grid container  spacing={24}>
+            <Grid item xs={12}>
+              <TextField
+                required
                 id="name"
                 label="Offer Title"
                 onChange={this.handleChange('title')}
@@ -116,7 +122,9 @@ class InsertOffer extends Component {
                 className="full-width"
                 variant="outlined"
               />
+            </Grid>
 
+            <Grid item xs={12}>
               <TextField
                 id="name"
                 label="Offer Link"
@@ -125,10 +133,9 @@ class InsertOffer extends Component {
                 className="full-width"
                 variant="outlined"
               />
+            </Grid>
 
-              <Divider />
-
-
+            <Grid item xs={12}>
               <TextField
                 id="description"
                 label="Description"
@@ -139,10 +146,15 @@ class InsertOffer extends Component {
                 margin="normal"
                 className="full-width"
                 variant="outlined"
+                xs
               />
+            </Grid>
+
+            <Grid item xs={6}>
               <TextField
                 id="discounted-amount"
                 variant="outlined"
+                className="full-width"
                 label="Offer Price"
                 value={this.state.discountedAmount}
                 onChange={this.handleChange('discountedAmount')}
@@ -150,8 +162,12 @@ class InsertOffer extends Component {
                   startAdornment: <InputAdornment position="start">€</InputAdornment>,
                 }}
               />
+            </Grid>
+
+            <Grid item xs={6}>
               <TextField
                 id="discounted-amount"
+                className="full-width"
                 variant="outlined"
                 label="Original Price"
                 value={this.state.originalAmount}
@@ -160,9 +176,9 @@ class InsertOffer extends Component {
                   startAdornment: <InputAdornment position="start">€</InputAdornment>,
                 }}
               />
+            </Grid>
 
-              <Divider />
-
+            <Grid item xs={12}>
               <TextField
                 id="voucher"
                 label="Voucher code (optional)"
@@ -171,43 +187,38 @@ class InsertOffer extends Component {
                 className="full-width"
                 variant="outlined"
               />
+            </Grid>
 
-            <Divider />
-
-
-            <Button variant="contained" href="./">
-              Cancel
-            </Button>
-            <Button variant="contained" color="primary" type="submit">
-              Save
-            </Button>
-
-            <input
-              accept="image/*"
-              id="outlined-button-file"
-              type="file"
-              style={{display: 'none'}}
-              onChange={(e)=>this.handleFile(e)}
-            />
-            <label htmlFor="outlined-button-file">
-              <Button variant="outlined" component="span">
-                Upload
+            <Grid item xs={12} className="formButtons">
+              <Button item href="./">
+                Annulla
               </Button>
-            </label>
-          </form>
+              <Button item variant="outlined" color="primary" type="submit">
+                Aggiungi
+              </Button>
+            </Grid>
+
+              <Grid item justify="center"xs={12}>
+              <input
+                accept="image/*"
+                id="outlined-button-file"
+                type="file"
+                style={{display: 'none'}}
+                onChange={(e)=>this.handleFile(e)}
+              />
+              <label htmlFor="outlined-button-file">
+                <Button variant="outlined" component="span">
+                  Upload
+                </Button>
+              </label>
+            </Grid>
+
+          </Grid>
+        </form>
 
           <div className="progress-bar"><span style={{width: this.state.progress}}></span></div>
-        </Grid>
 
-        <Grid item xs={6}>
-
-        </Grid>
-
-        <Grid item xs={12}>
-                
-        </Grid>
-
-      </Grid>
+      </Paper>
     );
 
   }

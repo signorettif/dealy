@@ -4,7 +4,7 @@ import _ from "lodash";
 import * as actions from "../actions";
 import OfferItem from "./OfferItem";
 import Sidebar from "./Sidebar";
-import {Button, Grid } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
 import "../styles/offersList.scss"

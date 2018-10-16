@@ -5,6 +5,7 @@ import _ from "lodash";
 import * as actions from "../actions";
 import {Typography, Paper, FormControl, InputLabel, Input, InputAdornment, TextField, Button, Grid, Divider, Chip} from '@material-ui/core';
 import { authRef, provider, offersRef, storageRef } from "../config/firebase";
+import CheckCircleIcon from '@material-ui/icons/CheckCircle'
 import "../styles/insertOffer.scss"
 
 class InsertOffer extends Component {
@@ -17,9 +18,6 @@ class InsertOffer extends Component {
     description: '',
     voucher:'',
     downloadURL: '',
-
-
-
     progress:'0%',
   };
 
@@ -102,21 +100,19 @@ class InsertOffer extends Component {
 
     return (
       <Paper id="content">
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" className="titoloPagina">
           Inserisci una nuova offerta
         </Typography>
 
-
         <form onSubmit={this.handleFormSubmit}>
-          <Grid container  spacing={24}>
+          <Grid container spacing={24}>
             <Grid item xs={12}>
               <TextField
                 required
                 id="name"
-                label="Offer Title"
+                label="Titolo offerta"
                 onChange={this.handleChange('title')}
-                margin="normal"
-                className="full-width"
+                fullWidth
                 variant="outlined"
               />
             </Grid>
@@ -124,10 +120,9 @@ class InsertOffer extends Component {
             <Grid item xs={12}>
               <TextField
                 id="name"
-                label="Offer Link"
+                label="Link"
                 onChange={this.handleChange('link')}
-                margin="normal"
-                className="full-width"
+                fullWidth
                 variant="outlined"
               />
             </Grid>
@@ -135,13 +130,12 @@ class InsertOffer extends Component {
             <Grid item xs={12}>
               <TextField
                 id="description"
-                label="Description"
+                label="Descrizione"
                 multiline
                 rowsMax="10"
                 value={this.state.description}
                 onChange={this.handleChange('description')}
-                margin="normal"
-                className="full-width"
+                fullWidth
                 variant="outlined"
                 xs
               />
@@ -151,8 +145,8 @@ class InsertOffer extends Component {
               <TextField
                 id="discounted-amount"
                 variant="outlined"
-                className="full-width"
-                label="Offer Price"
+                fullWidth
+                label="Prezzo scontato"
                 value={this.state.discountedAmount}
                 onChange={this.handleChange('discountedAmount')}
                 InputProps={{
@@ -164,9 +158,9 @@ class InsertOffer extends Component {
             <Grid item xs={6}>
               <TextField
                 id="discounted-amount"
-                className="full-width"
+                fullWidth
                 variant="outlined"
-                label="Original Price"
+                label="Prezzo originale"
                 value={this.state.originalAmount}
                 onChange={this.handleChange('originalAmount')}
                 InputProps={{
@@ -178,12 +172,37 @@ class InsertOffer extends Component {
             <Grid item xs={12}>
               <TextField
                 id="voucher"
-                label="Voucher code (optional)"
+                label="Codice sconto (opzionale)"
                 onChange={this.handleChange('voucher')}
-                margin="normal"
-                className="full-width"
+                fullWidth
                 variant="outlined"
               />
+            </Grid>
+
+            <Grid item xs={12}>
+              <input
+                accept="image/*"
+                id="outlined-button-file"
+                type="file"
+                style={{display: 'none'}}
+                onChange={(e)=>this.handleFile(e)}
+              />
+              <label htmlFor="outlined-button-file">
+                <Button
+                  disabled={this.state.progress=="100%"}
+                  className="progressButton"
+                  fullWidth
+                  variant="outlined"
+                  component="span"
+                >
+                  <div className="progress-bar"><span style={{width: this.state.progress}}></span></div>
+                  <span className="titoloBottoneImmagine">Aggiungi immagine (opzionale)</span>
+                  <CheckCircleIcon
+                    className="doneIcon"
+                    visibility={(this.state.progress=="100%") ? 'visible' : 'hidden'}
+                  />
+                </Button>
+              </label>
             </Grid>
 
             <Grid item xs={12} className="formButtons">
@@ -195,26 +214,8 @@ class InsertOffer extends Component {
               </Button>
             </Grid>
 
-              <Grid item justify="center"xs={12}>
-              <input
-                accept="image/*"
-                id="outlined-button-file"
-                type="file"
-                style={{display: 'none'}}
-                onChange={(e)=>this.handleFile(e)}
-              />
-              <label htmlFor="outlined-button-file">
-                <Button variant="outlined" component="span">
-                  Upload
-                </Button>
-              </label>
-            </Grid>
-
           </Grid>
         </form>
-
-          <div className="progress-bar"><span style={{width: this.state.progress}}></span></div>
-
       </Paper>
     );
 

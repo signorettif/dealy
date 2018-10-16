@@ -119,5 +119,5 @@ class ToDoListItem extends Component {
   }
 }
 
-// The connect method takes two arguments: the function which is taking the data from  store and the the object containing actions.
+// The connect method takes two arguments: the function which is taking the data from store and the the object containing actions.
 export default connect(null, actions)(ToDoListItem);

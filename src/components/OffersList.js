@@ -73,13 +73,13 @@ class OffersList extends Component {
             <Button onClick={this.handleCloseDialogue} color="primary">
               Annulla
             </Button>
-            <Button color="primary" autoFocus>
+            <Button onClick={(event) => {this.props.signIn(); this.handleCloseDialogue()}} color="primary" autoFocus>
               {"Login/Sign up"}
             </Button>
           </DialogActions>
         </Dialog>
         <Button
-          onClick={(this.props.authenticated) ? () => this.props.history.push('/new-offer') : this.handleOpenDialogue}
+          onClick={(this.props.authenticated) ? (event) => this.props.history.push('/new-offer') : this.handleOpenDialogue}
           variant="fab"
           color="primary"
           aria-label="Add"

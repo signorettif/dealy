@@ -4,16 +4,15 @@ import _ from "lodash";
 import * as actions from "../actions";
 import OfferItem from "./OfferItem";
 import Sidebar from "./Sidebar";
-import { Button, Grid } from '@material-ui/core';
+import { Button, Grid, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
 import "../styles/offersList.scss"
 
 class OffersList extends Component {
   state = {
-
+    openDialogue: false,
   };
-
 
   // Renders the Offers list
   renderOffers() {
@@ -32,6 +31,13 @@ class OffersList extends Component {
     );
   }
 
+  handleOpenDialogue = () => {
+    this.setState({ openDialogue: true });
+  };
+
+  handleCloseDialogue = () => {
+    this.setState({ openDialogue: false });
+  };
 
   componentWillMount() {
     this.props.fetchOffers();
@@ -50,7 +56,35 @@ class OffersList extends Component {
             </Grid>
           </Grid>
         </main>
-        <Button href="./new-offer" variant="fab" color="primary" aria-label="Add" className="aggiungiBottone" >
+
+        <Dialog
+          open={this.state.openDialogue}
+          onClose={this.handleCloseDialogue}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{"Solo gli utenti registrati possono aggiungere nuove offerte"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Per aggiungere nuovi offerte, devi prima iscriverti a Dealy. Se sei gia iscritto, accedi al tuo accout per aggiungere nuove offerte.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleCloseDialogue} color="primary">
+              Annulla
+            </Button>
+            <Button color="primary" autoFocus>
+              {"Login/Sign up"}
+            </Button>
+          </DialogActions>
+        </Dialog>
+        <Button
+          onClick={(this.props.authenticated) ? () => this.props.history.push('/new-offer') : this.handleOpenDialogue}
+          variant="fab"
+          color="primary"
+          aria-label="Add"
+          className="aggiungiBottone"
+        >
           <AddIcon />
         </Button>
       </React.Fragment>
@@ -58,9 +92,10 @@ class OffersList extends Component {
   }
 }
 
-const mapStateToProps = ({ data }) => {
+function mapStateToProps(state) {
   return {
-    data
+    data: state.data,
+    authenticated: state.auth
   };
 };
 

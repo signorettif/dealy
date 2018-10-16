@@ -108,10 +108,10 @@ class ToDoListItem extends Component {
         </CardContent>
         <p>{offer.heatCount}</p>
 
-        <Button variant="contained" disabled={this.hasCold()}  color="primary" type="submit" onClick={() => this.handleTemperature(offerId, "cold")}>
+        <Button variant="contained" /*disabled={this.hasCold()}*/  color="primary" type="submit" onClick={() => this.handleTemperature(offerId, "cold")}>
           Decrease
         </Button>
-        <Button variant="contained" disabled={this.hasHot()}  color="primary" type="submit" onClick={() => this.handleTemperature(offerId, "hot")}>
+        <Button variant="contained" /*disabled={this.hasHot()}*/  color="primary" type="submit" onClick={() => this.handleTemperature(offerId, "hot")}>
           Increase
         </Button>
       </Card>

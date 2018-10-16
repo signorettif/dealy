@@ -30,10 +30,10 @@ class Sidebar extends Component {
     seconds = (seconds < 10) ? "0" + seconds : seconds;
 
     switch(true){
-      case (minutes < 60):
+      case (minutes < 60 && hours<1):
         return (minutes + " minuti fa")
         break;
-      case (minutes < 120):
+      case (hours < 2):
         return (hours + " ora fa")
         break;
       default:
@@ -49,6 +49,19 @@ class Sidebar extends Component {
     });
   }
 
+  // TO be refactored somewhere where we can reuse it
+  dynamicSort = (property) => {
+    var sortOrder = 1;
+    if(property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+    return function (a,b) {
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result * sortOrder;
+    }
+  }
+
   renderSidebarOffers = () => {
     const { sidebarData } = this.state;
     var orderedArray = [];
@@ -56,11 +69,19 @@ class Sidebar extends Component {
     console.log(orderedArray);
 
     var now = new Date().getTime();
+    var stoArray = []
 
-    const SidebarOffers = _.map(sidebarData, (value, key) => {
+    _.map(sidebarData, (value, key) => {
+      stoArray.push(value)
+    });
+
+    //Sorts array from highest to lowest heatCount (hence the -)
+    const SidebarOffers = stoArray.sort(this.dynamicSort('-heatCount')).slice(0, 2).map((value, key) => {
+
       var timeDifference = now - value.createdAt;
+
       return(
-        <div className="hot-today">
+        <div className="hot-today" key={value.key}>
           <div className="hot-top">
             <span className="left"><i>-</i>{value.heatCount} &deg;<i>+</i></span>
             <span className="right">{this.msToTime(timeDifference)}</span>

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import * as actions from "../actions";
 import {PAGINATION_LENGTH} from "../config/globals";
-import OfferItem from "./OfferItem";
+import OffertaSingola from "./OffertaSingola";
 import Sidebar from "./Sidebar";
 import {offersRef} from "../config/firebase";
 import { Button, Grid, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
@@ -52,8 +52,8 @@ class OffersList extends Component {
     const Offers = _.map(data, (value, key) => {
       console.log(value)
       return(
-        <Grid item sm={12} md={6}>
-          <OfferItem key={key} offerId={key} offer={value} />
+        <Grid key={key} item sm={12} md={6}>
+          <OffertaSingola offerId={key} offer={value} />
         </ Grid>
       )
     });
@@ -84,9 +84,11 @@ class OffersList extends Component {
     return (
       <React.Fragment>
         <main>
-          <Grid container spacing={24}>
-            <Grid container item md={8} sm={12} spacing={24}>
-              {this.renderOffers()}
+          <Grid className="container" container spacing={40}>
+            <Grid item md={8} sm={12}>
+              <Grid container spacing={40}>
+                {this.renderOffers()}
+              </Grid>
             </Grid>
             <Grid item md={4} sm={12}>
               <Sidebar></Sidebar>

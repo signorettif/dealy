@@ -1,3 +1,3 @@
 //Global config variables
 
-export const PAGINATION_LENGTH = 3;
+export const PAGINATION_LENGTH = 6;

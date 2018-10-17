@@ -67,7 +67,7 @@ class Header extends Component {
       <AppBar position="relative" color="default" className="top">
         <Toolbar>
           <Typography variant="h6" color="inherit" className="toolbarTitle">
-            <NavLink to="/"  style={{ textDecoration: 'none', color: 'unset' }}>Dealy</NavLink>
+            <NavLink to="/" style={{ textDecoration: 'none', color: 'unset' }}>Dealy</NavLink>
           </Typography>
           {/* <Button>Più caldi</Button>
           <Button>Nuovi</Button>*/}

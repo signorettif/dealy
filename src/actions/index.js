@@ -1,5 +1,6 @@
 // This is the entry point for the actions module and contains 3 actions
 import { authRef, provider, offersRef } from "../config/firebase";
+import {PAGINATION_LENGTH} from "../config/globals";
 import { FETCH_OFFERS, FETCH_USER, FETCH_OFFER } from "./types";
 
 // Add comment to the offer
@@ -17,7 +18,6 @@ export const increaseLikes = offerAggiuntaLikeId => async dispatch => {
   //
 };
 
-// Add comment to the offer
 export const getOfferById = childId => async dispatch => {
   offersRef.child(childId).on("value", snapshot => {
     dispatch({
@@ -29,6 +29,15 @@ export const getOfferById = childId => async dispatch => {
 
 export const getOffersFromDate = date => async dispatch => {
   offersRef.orderByChild('createdAt').startAt(date).on("value", snapshot => {
+    dispatch({
+      type: FETCH_OFFER,
+      payload: snapshot.val()
+    });
+  });
+};
+
+export const getPaginatedOffers = (endKey) => async dispatch => {
+  offersRef.orderByKey().endAt(endKey).limitToLast(PAGINATION_LENGTH).on("value", snapshot => {
     dispatch({
       type: FETCH_OFFER,
       payload: snapshot.val()

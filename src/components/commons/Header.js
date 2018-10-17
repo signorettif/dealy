@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { NavLink } from 'react-router-dom'
 import {compose} from 'redux';
 import { AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem } from '@material-ui/core';
 import { AccountCircle } from '@material-ui/icons'
@@ -66,7 +67,7 @@ class Header extends Component {
       <AppBar position="relative" color="default" className="top">
         <Toolbar>
           <Typography variant="h6" color="inherit" className="toolbarTitle">
-            Dealy
+            <NavLink to="/" style={{ textDecoration: 'none', color: 'unset' }}>Dealy</NavLink>
           </Typography>
           {/* <Button>Più caldi</Button>
           <Button>Nuovi</Button>*/}

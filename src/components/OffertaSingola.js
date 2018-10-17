@@ -7,50 +7,43 @@ import * as actions from "../actions";
 import { CssBaseline, Card, CardContent, CardMedia, CardActions, Typography, Button } from '@material-ui/core';
 import "../styles/offerPage.scss"
 
-class OfferPage extends Component {
+class OffertaSingola extends Component {
 
   componentWillMount() {
-    const {offerId} = this.props.match.params;
-    this.props.getOfferById(offerId)
   }
 
   increaseCaldo(offer) {
-    const { offerId } = this.props.match.params;
 
-    var hotArray = offer.hotList;
-    var coldArray = offer.coldList;
-
-    this.props.increaseLikes(offerId, hotArray, coldArray);
   }
 
   render() {
-    const { data } = this.props;
+    const { offerId, offer } = this.props;
 
     return(
       <Card className="">
         <CardMedia
           className="card-img"
-          image={data.downloadURL}
+          image={offer.downloadURL}
         >
           {/*Questo da la dimensione al CardMedia*/}
-          <img src={data.downloadURL} style={{visibility: 'hidden'}} />
+          <img src={offer.downloadURL} style={{visibility: 'hidden'}} />
         </CardMedia>
         <CardContent>
           <Typography variant="h5" component="h2">
-            <a href={data.link} target="_blank">{data.title}</a>
+            <a href={offer.link} target="_blank">{offer.title}</a>
           </Typography>
           <Typography gutterBottom color="textSecondary">
-          {data.discountedAmount} {data.originalAmount} {data.time}
+          {offer.discountedAmount} {offer.originalAmount} {offer.time}
           </Typography>
           <Typography component="p">
-            {data.description}
+            {offer.description}
           </Typography>
         </CardContent>
       <CardActions>
         <Button size="small" color="primary">
           DECRESCI
         </Button>
-        <Button onClick={this.increaseCaldo(data)} size="small" color="primary">
+        <Button onClick={this.increaseCaldo(offer)} size="small" color="primary">
           CRESCI
         </Button>
       </CardActions>
@@ -60,12 +53,4 @@ class OfferPage extends Component {
   }
 }
 
-const mapStateToProps = ({ data }) => {
-  return {
-    data
-  };
-};
-
-export default compose(
-  connect(mapStateToProps, actions)
-)(OfferPage)
+export default connect(null, actions)(OffertaSingola);

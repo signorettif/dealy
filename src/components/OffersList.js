@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import * as actions from "../actions";
 import {PAGINATION_LENGTH} from "../config/globals";
-import OfferItem from "./OfferItem";
+import OffertaSingola from "./OffertaSingola";
 import Sidebar from "./Sidebar";
 import {offersRef} from "../config/firebase";
 import { Button, Grid, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
@@ -51,7 +51,11 @@ class OffersList extends Component {
 
     const Offers = _.map(data, (value, key) => {
       console.log(value)
-      return <OfferItem key={key} offerId={key} offer={value} />;
+      return(
+        <Grid key={key} item sm={12} md={6}>
+          <OffertaSingola offerId={key} offer={value} />
+        </ Grid>
+      )
     });
 
     if (!_.isEmpty(Offers)) {
@@ -80,11 +84,13 @@ class OffersList extends Component {
     return (
       <React.Fragment>
         <main>
-          <Grid container spacing={16}>
-            <Grid item xs={8}>
-              {this.renderOffers()}
+          <Grid className="container" container spacing={40}>
+            <Grid item md={8} sm={12}>
+              <Grid container spacing={40}>
+                {this.renderOffers()}
+              </Grid>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item md={4} sm={12}>
               <Sidebar></Sidebar>
             </Grid>
           </Grid>
@@ -106,13 +112,13 @@ class OffersList extends Component {
             <Button onClick={this.handleCloseDialogue} color="primary">
               Annulla
             </Button>
-            <Button color="primary" autoFocus>
+            <Button onClick={(event) => {this.props.signIn(); this.handleCloseDialogue()}} color="primary" autoFocus>
               {"Login/Sign up"}
             </Button>
           </DialogActions>
         </Dialog>
         <Button
-          onClick={(this.props.authenticated) ? () => this.props.history.push('/new-offer') : this.handleOpenDialogue}
+          onClick={(this.props.authenticated) ? (event) => this.props.history.push('/new-offer') : this.handleOpenDialogue}
           variant="fab"
           color="primary"
           aria-label="Add"

@@ -3,19 +3,19 @@ import { authRef, provider, offersRef } from "../config/firebase";
 import {PAGINATION_LENGTH} from "../config/globals";
 import { FETCH_OFFERS, FETCH_USER, FETCH_OFFER } from "./types";
 
+// Add comment to the offer
+export const addComment = addCommentOfferId => async dispatch => {
+  offersRef.child(addCommentOfferId).remove();
+};
+
 // Add new offer
 export const addOffer = newOffer => async dispatch => {
   offersRef.push().set(newOffer);
 };
 
 // Increase Likes on Posts
-export const increaseLikes = offerId => async dispatch => {
-  //offersRef.push().set(offerId);
-};
-
-// Add comment to the offer
-export const addComment = addCommentOfferId => async dispatch => {
-  offersRef.child(addCommentOfferId).remove();
+export const increaseLikes = offerAggiuntaLikeId => async dispatch => {
+  //
 };
 
 export const getOfferById = childId => async dispatch => {

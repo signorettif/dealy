@@ -1,9 +1,8 @@
 @import "variables";
 
 body{
-    background: $light-grey;
-    font-size: 12px;
-    font-family: 'Roboto', sans-serif;
+  background-color: $lighter-gray !important;
+  font-family: 'Roboto', sans-serif;
 }
 
 .container{

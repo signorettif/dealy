@@ -6,4 +6,27 @@
 
 .container{
   padding: 10px;
+  background: transparent;
+
+  .left-side{
+
+    h3{
+      margin-top: 20px;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    h6{
+      font-weight: 300;
+      margin-bottom: 60px;
+      color: #b3b3b3;
+    }
+
+    .data{
+      font-weight: bold;
+      font-size: 16px;
+      color: #1881e6;
+      margin-bottom: 20px;
+    }
+  }
 }

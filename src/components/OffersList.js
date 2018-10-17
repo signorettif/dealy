@@ -6,7 +6,7 @@ import {PAGINATION_LENGTH} from "../config/globals";
 import OffertaSingola from "./OffertaSingola";
 import Sidebar from "./Sidebar";
 import {offersRef} from "../config/firebase";
-import { Button, Grid, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
+import { Button, Grid, Typography, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import FirebasePaginator from "firebase-paginator";
 
@@ -52,7 +52,7 @@ class OffersList extends Component {
     const Offers = _.map(data, (value, key) => {
       console.log(value)
       return(
-        <Grid key={key} item sm={12} md={6}>
+        <Grid key={key} item sm={12}>
           <OffertaSingola offerId={key} offer={value} />
         </ Grid>
       )
@@ -85,8 +85,18 @@ class OffersList extends Component {
       <React.Fragment>
         <main>
           <Grid className="container" container spacing={40}>
-            <Grid item md={8} sm={12}>
-              <Grid container spacing={40}>
+            <Grid className="left-side" item md={8} sm={12}>
+              <Typography variant="h3">
+                Offerte recenti
+              </Typography>
+              <Typography variant="h6">
+                17 ottobre
+              </Typography>
+
+              <Typography variant="body2" className="data">
+                Oggi
+              </Typography>
+              <Grid container spacing={24}>
                 {this.renderOffers()}
               </Grid>
             </Grid>

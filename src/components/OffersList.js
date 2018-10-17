@@ -2,16 +2,47 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
 import * as actions from "../actions";
+import {PAGINATION_LENGTH} from "../config/globals";
 import OfferItem from "./OfferItem";
 import Sidebar from "./Sidebar";
+import {offersRef} from "../config/firebase";
 import { Button, Grid, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import FirebasePaginator from "firebase-paginator";
 
 import "../styles/offersList.scss"
 
 class OffersList extends Component {
   state = {
     openDialogue: false,
+    paginatedOffers: []
+  };
+
+  //Gets paginated offers with the help of firebase-paginator
+  getPaginatedOffers = (pageIndex) => {
+    var options = {
+      pageSize: PAGINATION_LENGTH,
+      finite: true,
+      retainLastPage: false
+    };
+
+    var paginator = new FirebasePaginator(offersRef, options);
+    var pagesEndList = [];
+    const {getPaginatedOffers} = this.props
+
+
+    var handler = function() {
+      pagesEndList = paginator.pages;
+
+      var endKey = pagesEndList[(pageIndex)].endKey;
+
+      getPaginatedOffers(endKey, PAGINATION_LENGTH);
+
+      // this.props.fetchLastOffersFromKey();
+    };
+
+    // Promise pattern
+    paginator.once('value').then(handler);
   };
 
   // Renders the Offers list
@@ -19,6 +50,7 @@ class OffersList extends Component {
     const { data } = this.props;
 
     const Offers = _.map(data, (value, key) => {
+      console.log(value)
       return <OfferItem key={key} offerId={key} offer={value} />;
     });
 
@@ -26,9 +58,7 @@ class OffersList extends Component {
       return Offers;
     }
 
-    return (
-      null
-    );
+    return null;
   }
 
   handleOpenDialogue = () => {
@@ -40,7 +70,10 @@ class OffersList extends Component {
   };
 
   componentWillMount() {
-    this.props.fetchOffers();
+    // this.props.fetchOffers();
+    const pageNumber = (this.props.match.params.pageNumber ? this.props.match.params.pageNumber : 1);
+    console.log(pageNumber)
+    this.getPaginatedOffers(pageNumber);
   }
 
   render() {

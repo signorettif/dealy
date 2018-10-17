@@ -100,7 +100,7 @@ class ToDoListItem extends Component {
                 </Button>
                 <Button
                   variant="outlined" color="primary"
-                  href={"./offer/" + offerId}
+                  href={"/offer/" + offerId}
                 >
                   Scopri
                 </Button>

@@ -51,7 +51,11 @@ class OffersList extends Component {
 
     const Offers = _.map(data, (value, key) => {
       console.log(value)
-      return <OfferItem key={key} offerId={key} offer={value} />;
+      return(
+        <Grid item sm={12} md={6}>
+          <OfferItem key={key} offerId={key} offer={value} />
+        </ Grid>
+      )
     });
 
     if (!_.isEmpty(Offers)) {
@@ -80,11 +84,11 @@ class OffersList extends Component {
     return (
       <React.Fragment>
         <main>
-          <Grid container spacing={16}>
-            <Grid item xs={8}>
+          <Grid container spacing={24}>
+            <Grid container item md={8} sm={12} spacing={24}>
               {this.renderOffers()}
             </Grid>
-            <Grid item xs={4}>
+            <Grid item md={4} sm={12}>
               <Sidebar></Sidebar>
             </Grid>
           </Grid>

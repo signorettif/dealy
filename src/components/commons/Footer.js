@@ -11,7 +11,7 @@ class Footer extends Component {
     return(
       <footer>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          {"Realizzato con "}<Emoji symbol="❤️"/>{" dal team di Dealy. Copiright 2018, tutti i diritti riservati."}
+          {"Realizzato con "}<Emoji symbol="❤️"/>{" dal team di Dealy. Copyright ©2018, tutti i diritti riservati."}
         </Typography>
       </footer>
     )

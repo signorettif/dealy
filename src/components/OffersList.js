@@ -4,6 +4,7 @@ import _ from "lodash";
 import * as actions from "../actions";
 import {PAGINATION_LENGTH} from "../config/globals";
 import OffertaSingola from "./OffertaSingola";
+import NuovaOfferta from "./NuovaOfferta";
 import Sidebar from "./Sidebar";
 import {offersRef} from "../config/firebase";
 import { Button, Grid, Typography, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
@@ -15,6 +16,7 @@ import "../styles/offersList.scss"
 class OffersList extends Component {
   state = {
     openDialogue: false,
+    openNewOffer: false,
     paginatedOffers: []
   };
 
@@ -80,6 +82,13 @@ class OffersList extends Component {
     this.getPaginatedOffers(pageNumber);
   }
 
+  // Gestisci apri e chiudi delle nuove offerte
+  toggleNewOffer = () => {
+    this.setState({
+      openNewOffer: !this.state.openNewOffer
+    });
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -128,14 +137,19 @@ class OffersList extends Component {
           </DialogActions>
         </Dialog>
         <Button
-          onClick={(this.props.authenticated) ? (event) => this.props.history.push('/new-offer') : this.handleOpenDialogue}
+          onClick={(this.props.authenticated) ? this.toggleNewOffer : this.handleOpenDialogue}
           variant="fab"
           color="primary"
           aria-label="Add"
           className="aggiungiBottone"
         >
-          <AddIcon />
+          <AddIcon className="icona-aggiungi" />
         </Button>
+        <NuovaOfferta
+          open={this.state.openNewOffer}
+          onOpen={this.toggleNewOffer}
+          onClose={this.toggleNewOffer}
+        />
       </React.Fragment>
     );
   }

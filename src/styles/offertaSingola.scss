@@ -16,9 +16,23 @@
     border-color: white;
     box-shadow: 0 3px 6px rgba(0,0,0,0.06), 0 3px 6px rgba(0,0,0,0.13);
     transform: scale(1.02);
+    -webkit-backface-visibility: hidden;
+
+    .heat-count-circle{
+      &::before {
+        position: absolute;
+        margin-top: -23px;
+        color: $hot-red;
+      }
+      &::after {
+        margin-top: 22px;
+        color: $primary-blue;
+      }
+    }
   }
 
   .heat-count-circle{
+    flex-shrink:0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,6 +58,22 @@
       color: white;
     }
 
+    &::before {
+      position: absolute;
+      transition: all .2s linear;
+      margin-top: -16px;
+      content: "+";
+      color: transparent;
+    }
+
+    &::after {
+      position: absolute;
+      transition: all .2s linear;
+      margin-top: 15px;
+      content: "-";
+      color: transparent;
+    }
+
   }
 
   .titolo-offerta{
@@ -53,6 +83,7 @@
   }
 
   .prezzi{
+    flex-shrink:0;
     color: $normal-gray;
     text-align: center;
     padding-left: 24px;

@@ -2,23 +2,68 @@
 
 .carta-offerta{
   overflow: hidden;
-  border-radius: 15px;
-  padding: 20px;
+  border-radius: 14px;
+  padding: 16px;
   background: $light-gray;
   display: flex;
   align-items: center;
   border: 1px solid #ebebeb;
+  box-shadow: none;
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 
-  .hot-score{
-    font-size: 16px;
+  &:hover{
+    background: white;
+    border-color: white;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.06), 0 3px 6px rgba(0,0,0,0.13);
+    transform: scale(1.02);
+  }
+
+  .heat-count-circle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    margin: 0 24px 0 4px;
+    height: 28px;
+    width: 28px;
+    background-color: #e0e0e0;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 12px;
     font-weight: bold;
-    color: $hot-red;
-    padding: 0 30px 0 10px;
+
+    color: $dark-gray;
+
+    &.isHot{
+      background-color: $hot-red;
+      color: white;
+    }
+
+    &.isCold{
+      background-color: $primary-blue;
+      color: white;
+    }
+
   }
 
   .titolo-offerta{
     font-size: 16px;
     color: $dark-gray;
     flex-grow: 1;
+  }
+
+  .prezzi{
+    color: $normal-gray;
+    text-align: center;
+    padding-left: 24px;
+
+    * {
+      display: block;
+    }
+
+    .originale{
+      font-size: 12px;
+      text-decoration: line-through;
+    }
   }
 }

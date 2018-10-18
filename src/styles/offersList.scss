@@ -1,3 +1,5 @@
+@import "variables";
+
 .aggiungiBottone {
   position: fixed !important;
   bottom: 20px;
@@ -25,7 +27,7 @@
     .data{
       font-weight: bold;
       font-size: 16px;
-      color: #1881e6;
+      color: $primary-blue;
       margin-bottom: 20px;
     }
   }

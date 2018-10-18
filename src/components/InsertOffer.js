@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ReduxThunk from 'redux-thunk';
+import Api from '../Api';
 import _ from "lodash";
 import * as actions from "../actions";
-import {Typography, Paper, FormControl, InputLabel, Input, InputAdornment, TextField, Button, Grid, Divider, Chip} from '@material-ui/core';
-import { authRef, provider, offersRef, storageRef } from "../config/firebase";
-import CheckCircleIcon from '@material-ui/icons/CheckCircle'
+import {Typography, Paper, InputAdornment, TextField, Button, Grid, Divider, Chip} from '@material-ui/core';
+import { authRef, storageRef } from "../config/firebase";
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import "../styles/insertOffer.scss"
 
 class InsertOffer extends Component {
@@ -71,28 +71,20 @@ class InsertOffer extends Component {
   };
 
   handleFormSubmit = event => {
-    // const { addFormValue } = this.state;
-    // const { addToDo } = this.props;
     event.preventDefault();
-    // addToDo({ title: addFormValue });
-    // this.setState({ addFormValue: "" });
 
-    // Aggiungere a questa finzione la data di aggiunta
-    const {addOffer} = this.props;
-      addOffer({
+    const offer = {
       title: this.state.title,
       link: this.state.link,
       discountedAmount: this.state.discountedAmount,
       originalAmount: this.state.originalAmount,
       description: this.state.description,
-      voucher: this.state.voucher,
-      createdAt: new Date().getTime(),
-      heatCount: 1,
-      hotList: [authRef.currentUser.uid],
-      downloadURL: this.state.downloadURL
-      }).then(function(){
-      window.location.href = "./";
-    })
+      voucher: this.state.voucher
+    }
+
+    Api.postOffer(offer);
+
+
   };
 
   render() {

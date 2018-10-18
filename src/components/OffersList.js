@@ -5,9 +5,10 @@ import * as actions from "../actions";
 import {PAGINATION_LENGTH} from "../config/globals";
 import OffertaSingola from "./OffertaSingola";
 import NuovaOfferta from "./NuovaOfferta";
+import LoginAlertDialogue from "./commons/LoginAlertDialogue";
 import Sidebar from "./Sidebar";
 import {offersRef} from "../config/firebase";
-import { Button, Grid, Typography, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
+import { Button, Grid, Typography } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import FirebasePaginator from "firebase-paginator";
 
@@ -15,7 +16,7 @@ import "../styles/offersList.scss"
 
 class OffersList extends Component {
   state = {
-    openDialogue: false,
+    openLoginAlertDialogue: false,
     openNewOffer: false,
     paginatedOffers: []
   };
@@ -67,19 +68,18 @@ class OffersList extends Component {
     return null;
   }
 
-  handleOpenDialogue = () => {
-    this.setState({ openDialogue: true });
-  };
-
-  handleCloseDialogue = () => {
-    this.setState({ openDialogue: false });
-  };
-
   componentWillMount() {
     // this.props.fetchOffers();
     const pageNumber = (this.props.match.params.pageNumber ? this.props.match.params.pageNumber : 1);
     console.log(pageNumber)
     this.getPaginatedOffers(pageNumber);
+  }
+
+  // Gestisci apri e chiudi della finestra del dialogo del login
+  toggleLoginAlertDialogue = () => {
+    this.setState({
+      openLoginAlertDialogue: !this.state.openLoginAlertDialogue
+    });
   }
 
   // Gestisci apri e chiudi delle nuove offerte
@@ -115,29 +115,8 @@ class OffersList extends Component {
           </Grid>
         </main>
 
-        <Dialog
-          open={this.state.openDialogue}
-          onClose={this.handleCloseDialogue}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle id="alert-dialog-title">{"Solo gli utenti registrati possono aggiungere nuove offerte"}</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              Per aggiungere nuovi offerte, devi prima iscriverti a Dealy. Se sei gia iscritto, accedi al tuo accout per aggiungere nuove offerte.
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleCloseDialogue} color="primary">
-              Annulla
-            </Button>
-            <Button onClick={(event) => {this.props.signIn(); this.handleCloseDialogue()}} color="primary" autoFocus>
-              {"Login/Sign up"}
-            </Button>
-          </DialogActions>
-        </Dialog>
         <Button
-          onClick={(this.props.authenticated) ? this.toggleNewOffer : this.handleOpenDialogue}
+          onClick={(this.props.authenticated) ? this.toggleNewOffer : this.toggleLoginAlertDialogue}
           variant="fab"
           color="primary"
           aria-label="Add"
@@ -145,6 +124,12 @@ class OffersList extends Component {
         >
           <AddIcon className="icona-aggiungi" />
         </Button>
+
+        <LoginAlertDialogue
+          open={this.state.openLoginAlertDialogue}
+          onClose={this.toggleLoginAlertDialogue}
+        />
+
         <NuovaOfferta
           open={this.state.openNewOffer}
           onOpen={this.toggleNewOffer}

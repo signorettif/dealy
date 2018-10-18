@@ -220,7 +220,7 @@ class NuovaOfferta extends Component {
               </Grid>
 
               <Grid item xs={12} className="formButtons">
-                <Button item href="./">
+                <Button item color="primary" onClick={this.props.onClose}>
                   Annulla
                 </Button>
                 <Button item variant="outlined" color="primary" type="submit">

@@ -7,16 +7,27 @@ import reducers from "./reducers";
 import App from "./App";
 import * as serviceWorker from './serviceWorker';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './styles/main.scss';
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+       main: '#1770f2',
+    }
+  }
+});
+
 ReactDOM.render(
   <React.Fragment>
     <CssBaseline />
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <MuiThemeProvider theme = { theme }>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </MuiThemeProvider>
   </React.Fragment>,
   document.getElementById("root")
 );

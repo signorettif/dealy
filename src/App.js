@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import { fetchUser } from "./actions";
 
 class App extends Component {
+
   componentWillMount() {
     this.props.fetchUser();
   }

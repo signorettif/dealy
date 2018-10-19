@@ -3,37 +3,43 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import _ from "lodash";
 import * as actions from "../actions";
+import Api from '../Api';
 
 import { CssBaseline, Card, CardContent, CardMedia, CardActions, Typography, Button } from '@material-ui/core';
 import "../styles/offerPage.scss"
 
 class OfferPage extends Component {
+  state = {
+    data: []
+  };
+
+  handleUpdate(elem, val) {
+    var obj  = {}
+    obj[elem] = val
+    this.setState(obj)
+    console.log('grandegianni');
+  }
 
   componentWillMount() {
     const {offerId} = this.props.match.params;
-    this.props.getOfferById(offerId)
-  }
-
-  increaseCaldo(offer) {
-    const { offerId } = this.props.match.params;
-
-    var hotArray = offer.hotList;
-    var coldArray = offer.coldList;
-
-    this.props.increaseLikes(offerId, hotArray, coldArray);
+    Api.getOfferById(offerId).then(response => {
+      console.log(response);
+      this.handleUpdate('data', response)
+    })
   }
 
   render() {
-    const { data } = this.props;
+    var { data } = this.state;
+    var imageURL = data.downloadURL ? data.downloadURL : 'https://boygeniusreport.files.wordpress.com/2018/05/pixel-3-render-2.jpg?quality=98&strip=all'
 
     return(
       <Card className="">
         <CardMedia
           className="card-img"
-          image={data.downloadURL}
+          image={imageURL}
         >
           {/*Questo da la dimensione al CardMedia*/}
-          <img src={data.downloadURL} style={{visibility: 'hidden'}} />
+          <img src={imageURL} style={{visibility: 'hidden'}} />
         </CardMedia>
         <CardContent>
           <Typography variant="h5" component="h2">
@@ -50,7 +56,7 @@ class OfferPage extends Component {
         <Button size="small" color="primary">
           DECRESCI
         </Button>
-        <Button onClick={this.increaseCaldo(data)} size="small" color="primary">
+        <Button size="small" color="primary">
           CRESCI
         </Button>
       </CardActions>

@@ -79,7 +79,9 @@ class NuovaOfferta extends Component {
       discountedAmount: this.state.discountedAmount,
       originalAmount: this.state.originalAmount,
       description: this.state.description,
-      voucher: this.state.voucher
+      voucher: this.state.voucher,
+      downloadURL: this.state.downloadURL,
+      heatCount: 1
     }
 
     Api.postOffer(offer);

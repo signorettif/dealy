@@ -22,33 +22,6 @@ class OffersList extends Component {
     paginatedOffers: []
   };
 
-  // //Gets paginated offers with the help of firebase-paginator
-  // getPaginatedOffers = (pageIndex) => {
-  //   var options = {
-  //     pageSize: PAGINATION_LENGTH,
-  //     finite: true,
-  //     retainLastPage: false
-  //   };
-
-  //   var paginator = new FirebasePaginator(offersRef, options);
-  //   var pagesEndList = [];
-  //   const {getPaginatedOffers} = this.props
-
-
-  //   var handler = function() {
-  //     pagesEndList = paginator.pages;
-
-  //     var endKey = pagesEndList[(pageIndex)].endKey;
-
-  //     getPaginatedOffers(endKey, PAGINATION_LENGTH);
-
-  //     // this.props.fetchLastOffersFromKey();
-  //   };
-
-  //   // Promise pattern
-  //   paginator.once('value').then(handler);
-  // };
-
   // Renders the Offers list
   renderOffers() {
     const Offers = this.state.paginatedOffers

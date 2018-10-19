@@ -12,8 +12,7 @@ import "../styles/offertaSingola.scss"
 class OffertaSingola extends Component {
 
   render() {
-    const { offerId, offer } = this.props;
-    console.log(offerId)
+    const { offer } = this.props;
 
     var hotStatus = classNames({
       'isHot': offer.heatCount > 2,
@@ -21,7 +20,7 @@ class OffertaSingola extends Component {
     });
 
     return(
-      <NavLink to={"/offer/" + offerId } style={{ textDecoration: 'none', color: 'unset' }}>
+      <NavLink to={"/offer/" + offer.id } style={{ textDecoration: 'none', color: 'unset' }}>
         <div className="carta-offerta" fullWidth>
           <div className={"heat-count-circle " + hotStatus}>
             {offer.heatCount}

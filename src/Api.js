@@ -7,10 +7,23 @@ import axios from 'axios';
  */
 class Api {
 
+
+    //GET Offers APIs
     static getAllOffers() {
         return axios.get(API_ROUTE+'/offers')
         .then(function (response) {
             return response.data;
+        })
+        .catch(function (error) {
+        console.log(error);
+        });
+    }
+
+    static getOfferById(id) {
+        return axios.get(API_ROUTE+'/offers/'+id)
+        .then(function (response) {
+            // console.log(response.data)
+            return response.data
         })
         .catch(function (error) {
         console.log(error);
@@ -28,6 +41,7 @@ class Api {
         });
     }
 
+    //POST Offers APIs
     static postOffer(offer) {
         axios.post(API_ROUTE+'/offers', offer)
           .then(function (response) {

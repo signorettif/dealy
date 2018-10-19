@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Header from "./components/commons/Header";
 import Footer from "./components/commons/Footer"
 import OffersList from "./components/OffersList";
-import InsertOffer from "./components/InsertOffer";
 import OfferPage from "./components/OfferPage";
 import { BrowserRouter, Route } from "react-router-dom";
 import { connect } from "react-redux";
@@ -22,7 +21,6 @@ class App extends Component {
             <div className="container">
               <Route exact path="/" component={OffersList} />
               <Route path="/page/:pageNumber" component={OffersList} />
-              <Route path="/new-offer" component={InsertOffer} />
               <Route path="/offer/:offerId" component={OfferPage} />
             </div>
             <Footer />

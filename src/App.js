@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Header from "./components/commons/Header";
 import Footer from "./components/commons/Footer"
 import OffersList from "./components/OffersList";
+import UserProfile from "./components/UserProfile";
 import OfferPage from "./components/OfferPage";
 import { BrowserRouter, Route } from "react-router-dom";
 import { connect } from "react-redux";
@@ -22,6 +23,7 @@ class App extends Component {
               <Route exact path="/" component={OffersList} />
               <Route path="/page/:pageNumber" component={OffersList} />
               <Route path="/offer/:offerId" component={OfferPage} />
+              <Route path="/userProfile/:userId" component={UserProfile} />
             </div>
             <Footer />
           </React.Fragment>

@@ -1,0 +1,10 @@
+@import "variables";
+
+.heading{
+  flex-basis: 33.33%;
+  flex-shrink: 0;
+}
+
+.secondary-heading{
+  color: $normal-gray !important;
+}

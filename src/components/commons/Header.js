@@ -52,7 +52,7 @@ class Header extends Component {
             open={open}
             onClose={this.handleClose}
           >
-            <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+            <MenuItem onClick={(event) => {this.props.history.push('/userProfile/fef'); this.handleClose()}}>Profile</MenuItem>
             <MenuItem onClick={(event) => {this.props.signOut(); this.handleClose()}}>Sign out</MenuItem>
           </Menu>
         </div>

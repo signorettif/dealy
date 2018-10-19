@@ -66,7 +66,7 @@ class Sidebar extends Component {
     const { sidebarData } = this.state;
     var orderedArray = [];
 
-    console.log(orderedArray);
+    // console.log(orderedArray);
 
     var now = new Date().getTime();
     var stoArray = []

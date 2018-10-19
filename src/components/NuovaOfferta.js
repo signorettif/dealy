@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ReduxThunk from 'redux-thunk';
 import _ from "lodash";
 import * as actions from "../actions";
-import { SwipeableDrawer, Typography, Paper, FormControl, InputLabel, Input, InputAdornment, TextField, Button, Grid, Divider, Chip} from '@material-ui/core';
-import { authRef, provider, offersRef, storageRef } from "../config/firebase";
+import { SwipeableDrawer, Typography, InputAdornment, TextField, Button, Grid} from '@material-ui/core';
+import { storageRef } from "../config/firebase";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
 import "../styles/nuovaOfferta.scss"
+import Api from '../Api';
 
 class NuovaOfferta extends Component {
 
@@ -70,28 +70,22 @@ class NuovaOfferta extends Component {
   };
 
   handleFormSubmit = event => {
-    // const { addFormValue } = this.state;
-    // const { addToDo } = this.props;
     event.preventDefault();
-    // addToDo({ title: addFormValue });
-    // this.setState({ addFormValue: "" });
 
-    // Aggiungere a questa finzione la data di aggiunta
-    const {addOffer} = this.props;
-      addOffer({
+    const offer = {
       title: this.state.title,
       link: this.state.link,
       discountedAmount: this.state.discountedAmount,
       originalAmount: this.state.originalAmount,
       description: this.state.description,
-      voucher: this.state.voucher,
-      createdAt: new Date().getTime(),
-      heatCount: 1,
-      hotList: [authRef.currentUser.uid],
-      downloadURL: this.state.downloadURL
-      }).then(function(){
-      window.location.href = "./";
-    })
+      voucher: this.state.voucher
+    }
+
+    Api.postOffer(offer);
+
+    //inserire qui modulo per chiudere drawer
+
+
   };
 
   toggleDrawer = (open) => () => {

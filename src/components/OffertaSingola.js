@@ -13,6 +13,7 @@ class OffertaSingola extends Component {
 
   render() {
     const { offerId, offer } = this.props;
+    console.log(offerId)
 
     var hotStatus = classNames({
       'isHot': offer.heatCount > 2,

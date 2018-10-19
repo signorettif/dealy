@@ -11,6 +11,7 @@ import {offersRef} from "../config/firebase";
 import { Button, Grid, Typography } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import FirebasePaginator from "firebase-paginator";
+import Api from '../Api';
 
 import "../styles/offersList.scss"
 
@@ -21,39 +22,37 @@ class OffersList extends Component {
     paginatedOffers: []
   };
 
-  //Gets paginated offers with the help of firebase-paginator
-  getPaginatedOffers = (pageIndex) => {
-    var options = {
-      pageSize: PAGINATION_LENGTH,
-      finite: true,
-      retainLastPage: false
-    };
+  // //Gets paginated offers with the help of firebase-paginator
+  // getPaginatedOffers = (pageIndex) => {
+  //   var options = {
+  //     pageSize: PAGINATION_LENGTH,
+  //     finite: true,
+  //     retainLastPage: false
+  //   };
 
-    var paginator = new FirebasePaginator(offersRef, options);
-    var pagesEndList = [];
-    const {getPaginatedOffers} = this.props
+  //   var paginator = new FirebasePaginator(offersRef, options);
+  //   var pagesEndList = [];
+  //   const {getPaginatedOffers} = this.props
 
 
-    var handler = function() {
-      pagesEndList = paginator.pages;
+  //   var handler = function() {
+  //     pagesEndList = paginator.pages;
 
-      var endKey = pagesEndList[(pageIndex)].endKey;
+  //     var endKey = pagesEndList[(pageIndex)].endKey;
 
-      getPaginatedOffers(endKey, PAGINATION_LENGTH);
+  //     getPaginatedOffers(endKey, PAGINATION_LENGTH);
 
-      // this.props.fetchLastOffersFromKey();
-    };
+  //     // this.props.fetchLastOffersFromKey();
+  //   };
 
-    // Promise pattern
-    paginator.once('value').then(handler);
-  };
+  //   // Promise pattern
+  //   paginator.once('value').then(handler);
+  // };
 
   // Renders the Offers list
   renderOffers() {
-    const { data } = this.props;
-
-    const Offers = _.map(data, (value, key) => {
-      console.log(value)
+    const Offers = this.state.paginatedOffers
+    const exportOf = Offers.map((value, key) => {
       return(
         <Grid key={key} item sm={12}>
           <OffertaSingola offerId={key} offer={value} />
@@ -61,18 +60,19 @@ class OffersList extends Component {
       )
     });
 
-    if (!_.isEmpty(Offers)) {
-      return Offers;
-    }
+    return exportOf
+  }
 
-    return null;
+  handleOffersUpdate = Offers => {
+    this.setState({'paginatedOffers': Offers})
   }
 
   componentWillMount() {
-    // this.props.fetchOffers();
     const pageNumber = (this.props.match.params.pageNumber ? this.props.match.params.pageNumber : 1);
-    console.log(pageNumber)
-    this.getPaginatedOffers(pageNumber);
+
+    Api.getPaginatedOffers(PAGINATION_LENGTH, pageNumber).then(response =>{
+      this.handleOffersUpdate(response.data);
+    })
   }
 
   // Gestisci apri e chiudi della finestra del dialogo del login

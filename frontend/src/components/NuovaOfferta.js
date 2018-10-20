@@ -7,6 +7,7 @@ import { storageRef } from "../config/firebase";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
 import "../styles/nuovaOfferta.scss"
 import Api from '../Api';
+import Store from '../Store';
 
 class NuovaOfferta extends Component {
 
@@ -71,8 +72,10 @@ class NuovaOfferta extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
+    const userId = Store.getUser().id
 
     const offer = {
+      user_id: userId,
       title: this.state.title,
       link: this.state.link,
       discountedAmount: this.state.discountedAmount,

@@ -7,11 +7,10 @@ import OffertaSingola from "./OffertaSingola";
 import NuovaOfferta from "./NuovaOfferta";
 import LoginAlertDialogue from "./commons/LoginAlertDialogue";
 import Sidebar from "./Sidebar";
-import {offersRef} from "../config/firebase";
 import { Button, Grid, Typography } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import FirebasePaginator from "firebase-paginator";
 import Api from '../Api';
+import Store from '../Store';
 
 import "../styles/offersList.scss"
 
@@ -46,6 +45,15 @@ class OffersList extends Component {
     Api.getPaginatedOffers(PAGINATION_LENGTH, pageNumber).then(response =>{
       this.handleOffersUpdate(response.data);
     })
+
+    const user = {
+      'email': 'signorettif@gmail.com',
+      'password': 'secret'
+    }
+
+    Api.userAuthenticate(user).then(response =>{
+      response.data ? Store.setUser(response.data) : Store.setUser(null)
+    });
   }
 
   // Gestisci apri e chiudi della finestra del dialogo del login

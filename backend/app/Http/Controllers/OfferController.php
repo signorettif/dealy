@@ -12,6 +12,7 @@ class OfferController extends Controller
     public function store(Request $request)
     {
       $validatedData = $request->validate([
+        'user_id' => 'required',
         'title' => 'required',
         'link' => 'nullable',
         'discountedAmount' => 'required',
@@ -23,6 +24,7 @@ class OfferController extends Controller
         ]);
 
       $offer = Offer::create([
+        'user_id' => $validatedData['user_id'],
         'title' => $validatedData['title'],
         'link' => $validatedData['link'],
         'discountedAmount' => $validatedData['discountedAmount'],
@@ -60,5 +62,12 @@ class OfferController extends Controller
         $offers = Offer::where('created_at', '>', Carbon::now()->subHours(24)->toDateTimeString())->orderBy($orderBy, 'desc')->get();
         return $offers->toJson();
     }
+
+    public function userCreator(Request $request){
+      $id = $request['id'];
+
+      $offer = Offer::find($id)->user()->get();
+      return $offer->toJson();
+  }
 
 }

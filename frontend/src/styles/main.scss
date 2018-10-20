@@ -1,8 +1,8 @@
 @import "variables";
 
 body{
-  background-color: $lighter-gray !important;
   font-family: 'Roboto', sans-serif;
+  background: white !important;
 }
 
 .container{
@@ -12,4 +12,18 @@ body{
 
 .full-width{
     width: 100%;
+}
+
+// Da qui in giù sono aposto
+
+.impaginatore{
+  width: 100%;
+  max-width: 640px;
+  margin: auto;
+}
+
+h1{
+  font-weight: bold !important;
+  color: $normal-gray !important;
+  margin-bottom: 50px !important;
 }

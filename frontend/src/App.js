@@ -4,6 +4,7 @@ import Footer from "./components/commons/Footer"
 import OffersList from "./components/OffersList";
 import UserProfile from "./components/UserProfile";
 import SignUpPage from "./components/signUp/SignUpPage";
+import SignAllPage from "./components/signUp/SignAllPage";
 import OfferPage from "./components/OfferPage";
 import { BrowserRouter, Route } from "react-router-dom";
 import { connect } from "react-redux";
@@ -26,6 +27,7 @@ class App extends Component {
               <Route path="/offer/:offerId" component={OfferPage} />
               <Route path="/userProfile/:userId" component={UserProfile} />
               <Route path="/signUp" component={SignUpPage} />
+              <Route path="/session/new" component={SignAllPage} />
             </div>
             <Footer />
           </React.Fragment>

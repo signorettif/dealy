@@ -4,6 +4,7 @@ import { compose } from "redux";
 import _ from "lodash";
 import * as actions from "../actions";
 import Api from '../Api';
+import Store from '../Store';
 
 import { CssBaseline, Card, CardContent, CardMedia, CardActions, Typography, Button } from '@material-ui/core';
 import "../styles/offerPage.scss"

@@ -18,7 +18,38 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 
+        'surname',
+        'username',
+        'email', 
+        'password', 
+        'role',
+        'profile_img'
+    ];
+
+    public static function generateVerificationToken()
+    {
+       return str_random(40);
+    }
+
+    public static $validatorCreate = [
+        'name' => 'required|string',
+        'surname' => 'required|string',
+        'username' => 'required|string|unique:users,username',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|string',
+        'role' => 'integer',
+        'profile_img' => 'string',
+    ];
+
+    public static $validatorUpdate = [
+        'name' => 'string',
+        'surname' => 'string',
+        'username' => 'string|unique:users,username',
+        'email' => 'email|unique:users,email',
+        'password' => 'min:6',
+        'role' => 'integer',
+        'profile_img' => 'string',
     ];
 
     /**
@@ -27,6 +58,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token'
     ];
 }

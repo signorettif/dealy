@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import _ from "lodash";
-import { Typography, Button, TextField, Tabs, Tab } from '@material-ui/core';
+import { Typography, Button, InputBase, Tabs, Tab } from '@material-ui/core';
 import SwipeableViews from 'react-swipeable-views';
 import "../../styles/signAllPage.scss"
 
@@ -40,9 +39,17 @@ export default class SignAllPage extends Component {
       case 1:
 
       case 2:
-      
+
     }
   };
+
+  loginButton(){
+    switch (this.state.tab) {
+      case 0: return('Login');
+      case 1: return('Registrati');
+      case 2: return('Inviami una password')
+    }
+  }
 
   render() {
     return(
@@ -52,49 +59,46 @@ export default class SignAllPage extends Component {
         </Typography>
 
         <Tabs
-            value={this.state.tab}
-            onChange={this.handleTabs}
-            classes={{ root: "tabs-container", indicator: "tabs-indicator" }}
-          >
-            <Tab label="Accedi" className={{ root: 'tab-login', selected: 'selected' }} disableRipple/>
-            <Tab label="Registrati" className={{ root: 'tab-login', selected: 'selected' }} disableRipple/>
-            <Tab label="Password dimenticata?" className={{ root: 'tab-login', selected: 'selected' }} disableRipple/>
-          </Tabs>
+          value={this.state.tab}
+          onChange={this.handleTabs}
+          classes={{ root: "tabs-container", indicator: "tabs-indicator", scroller:'scroller' }}
+        >
+          <Tab label="Accedi" classes={{root: 'tab-login', labelContainer: 'label-container'}} disableRipple/>
+          <Tab label="Crea nuovo account" classes={{root: 'tab-login', labelContainer: 'label-container'}} disableRipple/>
+          <Tab label="Password dimenticata?" classes={{root: 'tab-login', labelContainer: 'label-container'}} disableRipple/>
+        </Tabs>
         {/*<SwipeableViews
           index={this.state.value}
           onChangeIndex={this.handleChangeIndex}
         >*/}
           <form className="form-login" onSubmit={this.handleFormSubmit}>
-            <TextField
+            <InputBase
               id="outlined-email-input"
               label="Email"
-              className="input-login"
+              classes={{root: 'input-login'}}
               type="email"
               value={this.state.email}
               onChange={this.handleChange('email')}
               autoComplete="email"
-              variant="outlined"
             />
-            {this.state.tab == 1 && <TextField
+            {this.state.tab == 1 && <InputBase
               id="outlined-name"
               label="Username"
-              className="input-login"
+              classes={{root: 'input-login'}}
               value={this.state.username}
               onChange={this.handleChange('username')}
-              variant="outlined"
             />}
-            {this.state.tab != 2 && <TextField
+            {this.state.tab != 2 && <InputBase
               id="outlined-password-input"
               label="Password"
-              className="input-login"
+              classes={{root: 'input-login'}}
               type="password"
               value={this.state.password}
               onChange={this.handleChange('password')}
               autoComplete="current-password"
-              variant="outlined"
             />}
-            <Button item variant="outlined" color="primary" type="submit">
-              Invia
+            <Button classes={{root:'login-button'}} type="submit">
+              {this.loginButton()}
             </Button>
           </form>
         {/*</SwipeableViews>*/}

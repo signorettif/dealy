@@ -2,7 +2,7 @@
 
 body{
   font-family: 'Roboto', sans-serif;
-  background: white !important;
+  background: $background-gray !important;
 }
 
 .container{
@@ -17,6 +17,7 @@ body{
 // Da qui in giù sono aposto
 
 .impaginatore{
+  margin-top: 50px !important;
   width: 100%;
   max-width: 640px;
   margin: auto;

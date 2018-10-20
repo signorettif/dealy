@@ -23,14 +23,14 @@ class OfferPage extends Component {
   componentWillMount() {
     const {offerId} = this.props.match.params;
     Api.getOfferById(offerId).then(response => {
-      console.log(response);
+      // console.log(response);
       this.handleUpdate('data', response)
     })
   }
 
   render() {
     var { data } = this.state;
-    var imageURL = data.downloadURL ? data.downloadURL : 'https://boygeniusreport.files.wordpress.com/2018/05/pixel-3-render-2.jpg?quality=98&strip=all'
+    var imageURL = data.downloadURL ? data.downloadURL : ''
 
     return(
       <Card className="">

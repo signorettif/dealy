@@ -93,7 +93,7 @@ class OffersList extends Component {
         </main>
 
         <Button
-          onClick={(this.props.authenticated) ? this.toggleNewOffer : this.toggleLoginAlertDialogue}
+          onClick={(this.state.user) ? this.toggleNewOffer : this.toggleLoginAlertDialogue}
           variant="fab"
           color="primary"
           aria-label="Add"

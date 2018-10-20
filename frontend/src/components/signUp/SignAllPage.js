@@ -5,6 +5,7 @@ import { Typography, Button, TextField, Tabs, Tab } from '@material-ui/core';
 import SwipeableViews from 'react-swipeable-views';
 import "../../styles/signAllPage.scss"
 import Api from "../../Api"
+import Store from '../../Store';
 
 
 const steps = ['Crea utente', 'Dati personali', 'Finito!'];
@@ -42,7 +43,14 @@ export default class SignAllPage extends Component {
 
     switch (this.state.tab) {
       case 0:
+        if (user.email && user.password){
+          Api.userAuthenticate(user).then(response =>{
+            response.data ? Store.setUser(response.data) : Store.setUser(null);
 
+            //Maybe redirect here?
+          })
+        }
+        break;
       case 1:
         Api.userRegister(user).then(function(){
           //callback function

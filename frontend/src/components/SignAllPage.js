@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import _ from "lodash";
 import { Typography, Button, InputBase, Tabs, Tab } from '@material-ui/core';
 import SwipeableViews from 'react-swipeable-views';
-import "../../styles/signAllPage.scss"
-import Api from "../../Api"
-import Store from '../../Store';
+import "../styles/signAllPage.scss"
+import Api from "../Api"
+import Store from '../Store';
 
 
 const steps = ['Crea utente', 'Dati personali', 'Finito!'];

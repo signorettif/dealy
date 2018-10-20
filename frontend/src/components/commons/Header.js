@@ -52,7 +52,7 @@ class Header extends Component {
             open={open}
             onClose={this.handleClose}
           >
-            <MenuItem onClick={(event) => {this.props.history.push('/userProfile/fef'); this.handleClose()}}>
+            <MenuItem onClick={(event) => {this.props.history.push('/user/fef'); this.handleClose()}}>
               <NavLink to="/userProfile/fjf" style={{ textDecoration: 'none', color: 'unset' }}>
                 Il mio profilo
               </NavLink>

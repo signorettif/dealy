@@ -27,9 +27,7 @@ class OffersList extends Component {
     const Offers = this.state.paginatedOffers
     const exportOf = Offers.map((value, key) => {
       return(
-        <Grid key={key} item sm={12}>
-          <OffertaSingola offerId={key} offer={value} />
-        </ Grid>
+        <OffertaSingola offerId={key} offer={value} />
       )
     });
 
@@ -69,27 +67,17 @@ class OffersList extends Component {
   render() {
     return (
       <React.Fragment>
-        <main>
-          <Grid className="container" container spacing={40}>
-            <Grid className="left-side" item md={8} sm={12}>
-              <Typography variant="h3">
-                Offerte recenti
-              </Typography>
-              <Typography variant="h6">
-                17 ottobre
-              </Typography>
+        <main className="impaginatore">
+          <Typography variant="h1" className='titolo-data'>
+            Offerte
+          </Typography>
+          <div className="section-heading">
+            <Typography variant="h3" className='titolo-data'>
+              Oggi
+            </Typography>
+          </div>
 
-              <Typography variant="body2" className="data">
-                Oggi
-              </Typography>
-              <Grid container spacing={24}>
-                {this.renderOffers()}
-              </Grid>
-            </Grid>
-            <Grid item md={4} sm={12}>
-              <Sidebar></Sidebar>
-            </Grid>
-          </Grid>
+          {this.renderOffers()}
         </main>
 
         <Button
@@ -97,7 +85,7 @@ class OffersList extends Component {
           variant="fab"
           color="primary"
           aria-label="Add"
-          className="aggiungiBottone"
+          classes={{root: "aggiungiBottone"}}
         >
           <AddIcon className="icona-aggiungi" />
         </Button>

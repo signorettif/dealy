@@ -15,17 +15,30 @@ body{
     width: 100%;
 }
 
+
 // Da qui in giù sono aposto
 
 .impaginatore{
   margin-top: 50px !important;
   width: 100%;
-  max-width: 640px;
+  max-width: 660px;
   margin: auto;
+  padding: 0 10px 0 10px;
 }
 
 h1{
   font-weight: bold !important;
   color: $normal-gray !important;
   margin-bottom: 50px !important;
+}
+
+h3{
+  width: auto !important;
+  font-size: 17px !important;
+  text-transform: uppercase;
+  font-weight: 700 !important;
+  line-height: 20px;
+  color: $dark-gray;
+  vertical-align: middle;
+  padding: 4px 0;
 }

@@ -15,7 +15,8 @@ const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 const theme = createMuiTheme({
   palette: {
     primary: {
-       main: '#1770f2',
+       main: '#FE6B8B',
+       contrastText: 'white'
     }
   }
 });

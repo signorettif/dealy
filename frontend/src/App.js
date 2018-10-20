@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import Header from "./components/commons/Header";
-import Footer from "./components/commons/Footer"
+import Navigation from "./components/commons/Navigation";
 import OffersList from "./components/OffersList";
 import UserProfile from "./components/UserProfile";
 import SignAllPage from "./components/SignAllPage";
@@ -19,15 +18,14 @@ class App extends Component {
     return (
         <BrowserRouter>
           <React.Fragment>
-            <Header />
-            <div className="container">
+            <Navigation />
+            <div className="right-panel">
               <Route exact path="/" component={OffersList} />
               <Route path="/page/:pageNumber" component={OffersList} />
               <Route path="/offer/:offerId" component={OfferPage} />
               <Route path="/user/:userId" component={UserProfile} />
               <Route path="/session/new" component={SignAllPage} />
             </div>
-            <Footer />
           </React.Fragment>
         </BrowserRouter>
     );

@@ -4,8 +4,6 @@ import { NavLink } from 'react-router-dom';
 import Emoji from "./Emoji"
 import _ from "lodash";
 
-import "../../styles/footer.scss"
-
 class LoginAlertDialogue extends Component {
 
   render(){

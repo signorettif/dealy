@@ -6,13 +6,15 @@ body{
   color: $dark-gray !important;
 }
 
-.container{
-    margin: 20px auto;
-    max-width: $larghezza-massima;
-}
+.right-panel{
+  display: block;
+  float: left;
+  width: 100%;
 
-.full-width{
-    width: 100%;
+  @media screen and (min-width: 1024px){
+    margin-left: 25%;
+    width: 75%
+  }
 }
 
 

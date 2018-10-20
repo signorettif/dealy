@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'v1', 'middleware' => 'cors'],  function() {
     Route::get('offers', 'OfferController@index');
     Route::get('paginatedOffers/{offersPerPage}', 'OfferController@paginatedOffers');
-    Route::get('paginatedQueryOffers', 'OfferController@paginatedQueryOffers');
+    Route::get('lastOffers', 'OfferController@lastOffers');
     Route::post('offers', 'OfferController@store');
     Route::get('offers/{id}', 'OfferController@getOfferByID');
 });

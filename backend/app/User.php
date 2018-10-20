@@ -33,11 +33,11 @@ class User extends Authenticatable
     }
 
     public static $validatorCreate = [
-        'name' => 'required|string',
-        'surname' => 'required|string',
+        'name' => 'string',
+        'surname' => 'string',
         'username' => 'required|string|unique:users,username',
         'email' => 'required|email|unique:users,email',
-        'password' => 'required|string',
+        'password' => 'required|string|min:6',
         'role' => 'integer',
         'profile_img' => 'string',
     ];
@@ -60,4 +60,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token'
     ];
+
+
+    public function offers()
+    {
+        return $this->hasMany('App\Offer');
+    }
 }

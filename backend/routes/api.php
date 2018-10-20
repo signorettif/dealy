@@ -32,6 +32,7 @@ Route::group(['prefix' => 'v1'], function() {
 //Get offers, no auth needed (for now all of them are present)
 Route::group(['prefix' => 'v1', 'middleware' => 'cors'],  function() {
     Route::get('offers', 'OfferController@index');
+    Route::get('offersUser', 'OfferController@userCreator');
     Route::get('paginatedOffers/{offersPerPage}', 'OfferController@paginatedOffers');
     Route::get('lastOffers', 'OfferController@lastOffers');
     Route::post('offers', 'OfferController@store');

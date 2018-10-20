@@ -52,7 +52,7 @@ class OffersList extends Component {
     }
 
     Api.userAuthenticate(user).then(response =>{
-      Store.setUser(response.data)
+      response.data ? Store.setUser(response.data) : Store.setUser(null)
     });
   }
 

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Offer extends Model
 {
     protected $fillable = [
+        'user_id',
         'title',
         'link',
         'discountedAmount',
@@ -16,4 +17,9 @@ class Offer extends Model
         'heatCount',
         'downloadURL'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

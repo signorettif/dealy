@@ -1,0 +1,31 @@
+@import "variables";
+
+.paper-container{
+  padding: 30px;
+}
+
+.stepper{
+  padding: 30px 0 30px 0 !important;
+  max-width: 600px;
+  margin: auto;
+
+
+}
+
+h5{
+  margin-bottom: 20px!important;
+}
+
+.bottoni {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+
+  .bottone{
+    margin-left: 10px;
+
+    &:first-child{
+      margin-left: 0;
+    }
+  }
+}

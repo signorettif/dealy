@@ -26,7 +26,10 @@ class UserProfile extends Component {
 
   render(){
     return(
-      <div className="container">
+      <div className="impaginatore">
+        <Typography variant="h1">
+          Account
+        </Typography>
 
         <ExpansionPanel expanded={this.state.expanded === 'panel1'} onChange={this.handleOpenPanel('panel1')}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>

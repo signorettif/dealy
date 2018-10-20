@@ -45,7 +45,6 @@ export default class SignAllPage extends Component {
         if (user.email && user.password){
           Api.userAuthenticate(user).then(response =>{
             response.data ? Store.setUser(response.data) : Store.setUser(null);
-
             //Maybe redirect here?
           })
         }
@@ -92,7 +91,7 @@ export default class SignAllPage extends Component {
           <form className="form-login" onSubmit={this.handleFormSubmit}>
             <InputBase
               id="outlined-email-input"
-              label="Email"
+              placeholder="Email"
               classes={{root: 'input-login'}}
               type="email"
               value={this.state.email}
@@ -101,14 +100,14 @@ export default class SignAllPage extends Component {
             />
             {this.state.tab == 1 && <InputBase
               id="outlined-name"
-              label="Username"
+              placeholder="Username"
               classes={{root: 'input-login'}}
               value={this.state.username}
               onChange={this.handleChange('username')}
             />}
             {this.state.tab != 2 && <InputBase
               id="outlined-password-input"
-              label="Password"
+              placeholder="Password"
               classes={{root: 'input-login'}}
               type="password"
               value={this.state.password}

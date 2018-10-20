@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Typography, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
+import { NavLink } from 'react-router-dom';
 import Emoji from "./Emoji"
 import _ from "lodash";
 
@@ -25,8 +26,10 @@ class LoginAlertDialogue extends Component {
           <Button onClick={this.props.onClose} color="primary">
             Annulla
           </Button>
-          <Button onClick={(event) => {this.props.signIn(); this.props.onClose()}} color="primary" autoFocus>
-            {"Login/Sign up"}
+          <Button onClick={this.props.onClose} color="primary" autoFocus>
+            <NavLink to="/session/new" style={{ textDecoration: 'none', color: 'unset' }}>
+            {"Login/Resigstrati"}
+            </NavLink>
           </Button>
         </DialogActions>
       </Dialog>

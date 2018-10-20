@@ -18,7 +18,8 @@ class OffersList extends Component {
   state = {
     openLoginAlertDialogue: false,
     openNewOffer: false,
-    paginatedOffers: []
+    paginatedOffers: [],
+    user: Store.getUser()
   };
 
   // Renders the Offers list
@@ -46,14 +47,9 @@ class OffersList extends Component {
       this.handleOffersUpdate(response.data);
     })
 
-    const user = {
-      'email': 'signorettif@gmail.com',
-      'password': 'secret'
+    if (this.state.user){
+      console.log('User authenticated with username: ' + this.state.user.username)
     }
-
-    Api.userAuthenticate(user).then(response =>{
-      response.data ? Store.setUser(response.data) : Store.setUser(null)
-    });
   }
 
   // Gestisci apri e chiudi della finestra del dialogo del login
@@ -97,7 +93,7 @@ class OffersList extends Component {
         </main>
 
         <Button
-          onClick={(this.props.authenticated) ? this.toggleNewOffer : this.toggleLoginAlertDialogue}
+          onClick={(this.state.user) ? this.toggleNewOffer : this.toggleLoginAlertDialogue}
           variant="fab"
           color="primary"
           aria-label="Add"

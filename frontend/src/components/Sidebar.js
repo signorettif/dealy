@@ -63,7 +63,6 @@ class Sidebar extends Component {
 
   componentWillMount () {
     Api.getLastDayOffers('heatCount').then(response => {
-      console.log(response)
       this.handleUpdate('sidebarData', response)
     })
   }

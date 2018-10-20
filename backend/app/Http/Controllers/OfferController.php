@@ -54,9 +54,10 @@ class OfferController extends Controller
         return $offers->toJson();
     }
 
-    public function paginatedQueryOffers(Request $request){
+    public function lastOffers(Request $request){
+        $orderBy = $request['orderBy'];
 
-        $offers = Offer::where('created_at', '>', Carbon::now()->subHours(24)->toDateTimeString())->get();
+        $offers = Offer::where('created_at', '>', Carbon::now()->subHours(24)->toDateTimeString())->orderBy($orderBy, 'desc')->get();
         return $offers->toJson();
     }
 

@@ -41,6 +41,18 @@ class Api {
         });
     }
 
+    static getLastDayOffers(orderBy){
+        return axios.get(API_ROUTE+'/lastOffers?orderBy='+orderBy)
+        .then(function (response) {
+            // console.log(response.data);
+            return response.data
+        })
+        .catch(function (error) {
+        console.log(error);
+        });
+    }
+
+
     //POST Offers APIs
     static postOffer(offer) {
         axios.post(API_ROUTE+'/offers', offer)

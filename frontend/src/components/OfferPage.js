@@ -17,7 +17,6 @@ class OfferPage extends Component {
     var obj  = {}
     obj[elem] = val
     this.setState(obj)
-    console.log('grandegianni');
   }
 
   componentWillMount() {

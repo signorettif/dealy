@@ -6,6 +6,7 @@ import _ from "lodash";
 import * as actions from "../actions";
 import Emoji from "./commons/Emoji"
 import { offersRef } from "../config/firebase";
+import Api from "../Api";
 
 
 import "../styles/sidebar.scss"
@@ -19,64 +20,19 @@ class Sidebar extends Component {
     }
   }
 
-  msToTime = (duration) => {
-    var milliseconds = parseInt((duration % 1000) / 100),
-      seconds = parseInt((duration / 1000) % 60),
-      minutes = parseInt((duration / (1000 * 60)) % 60),
-      hours = parseInt((duration / (1000 * 60 * 60)) % 24);
-
-    hours = (hours < 10) ? "0" + hours : hours;
-    minutes = (minutes < 10) ? "0" + minutes : minutes;
-    seconds = (seconds < 10) ? "0" + seconds : seconds;
-
-    switch(true){
-      case (minutes < 60 && hours<1):
-        return (minutes + " minuti fa")
-        break;
-      case (hours < 2):
-        return (hours + " ora fa")
-        break;
-      default:
-        return (hours + " ore fa")
-        break;
-    }
-  }
-
-  getOffers = (date) => {
-    offersRef.orderByChild('createdAt').startAt(date)
-    .on("value", snapshot => {
-      this.setState({'sidebarData': snapshot.val()});
-    });
-  }
-
-  // TO be refactored somewhere where we can reuse it
-  dynamicSort = (property) => {
-    var sortOrder = 1;
-    if(property[0] === "-") {
-        sortOrder = -1;
-        property = property.substr(1);
-    }
-    return function (a,b) {
-        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-        return result * sortOrder;
-    }
+  handleUpdate(elem, val) {
+    var obj  = {}
+    obj[elem] = val
+    this.setState(obj)
   }
 
   renderSidebarOffers = () => {
     const { sidebarData } = this.state;
-    var orderedArray = [];
-
-    // console.log(orderedArray);
 
     var now = new Date().getTime();
-    var stoArray = []
-
-    _.map(sidebarData, (value, key) => {
-      stoArray.push(value)
-    });
 
     //Sorts array from highest to lowest heatCount (hence the -)
-    const SidebarOffers = stoArray.sort(this.dynamicSort('-heatCount')).slice(0, 2).map((value, key) => {
+    const SidebarOffers = sidebarData.map((value, key) => {
 
       var timeDifference = now - value.createdAt;
 
@@ -84,12 +40,12 @@ class Sidebar extends Component {
         <div className="hot-today" key={value.key}>
           <div className="hot-top">
             <span className="left"><i>-</i>{value.heatCount} &deg;<i>+</i></span>
-            <span className="right">{this.msToTime(timeDifference)}</span>
+            <span className="right">{value.created_at}</span>
           </div>
           <div className="hot-title">
             <img src="/img/offer-placeholder.jpg" />
             <h2>
-              <a href={value.link}>{value.title}</a>
+              <a href={"./offer/" + value.id}>{value.title}</a>
             </h2>
           </div>
         </div>
@@ -106,8 +62,10 @@ class Sidebar extends Component {
   }
 
   componentWillMount () {
-    var yesterday = new Date(new Date().setDate(new Date().getDate()-1)).getTime();
-    this.getOffers(yesterday);
+    Api.getLastDayOffers('heatCount').then(response => {
+      console.log(response)
+      this.handleUpdate('sidebarData', response)
+    })
   }
 
   componentDidMount () {

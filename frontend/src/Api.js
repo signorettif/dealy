@@ -33,16 +33,26 @@ class Api {
 
   // User API
 
-  static userAuthenticate(data) {
+    static userAuthenticate(data) {
 
-    return axios.post(API_ROUTE+'/login', this.dataToFormdata(data))
-          .then(function (response) {
-            return this.handleResponse(response);
-          }.bind(this))
-          .catch(function (error) {
-            this.handleError(error);;
-          }.bind(this));
-  }
+        return axios.post(API_ROUTE+'/login', this.dataToFormdata(data))
+            .then(function (response) {
+                return this.handleResponse(response);
+            }.bind(this))
+            .catch(function (error) {
+                this.handleError(error);;
+            }.bind(this));
+    }
+
+    static userRegister(data) {
+        return axios.post(API_ROUTE+'/createUser', this.dataToFormdata(data))
+            .then(function (response) {
+                return this.handleResponse(response);
+            }.bind(this))
+            .catch(function (error) {
+                this.handleError(error);;
+            }.bind(this));
+    }
 
 
     //GET Offers APIs

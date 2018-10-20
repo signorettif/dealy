@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Authentication routes
 Route::group(['prefix' => 'v1'], function() {
     Route::post('login', 'PassportController@login');
-    route::post( 'createUser', 'PassportController@store');
+    Route::post( 'createUser', 'PassportController@store');
     Route::get( 'userdetails', 'PassportController@getDetails')->middleware('auth:api');
     Route::get( 'users/userByToken/{token}','PassportController@getUserByToken');
     Route::post('users/verify','PassportController@verify')->name('user_verify');

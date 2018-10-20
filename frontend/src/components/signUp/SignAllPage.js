@@ -4,6 +4,7 @@ import _ from "lodash";
 import { Typography, Button, TextField, Tabs, Tab } from '@material-ui/core';
 import SwipeableViews from 'react-swipeable-views';
 import "../../styles/signAllPage.scss"
+import Api from "../../Api"
 
 
 const steps = ['Crea utente', 'Dati personali', 'Finito!'];
@@ -33,11 +34,20 @@ export default class SignAllPage extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
+    const user = {
+      email: this.state.email,
+      password: this.state.password,
+      username: this.state.username
+    }
 
     switch (this.state.tab) {
       case 0:
 
       case 1:
+        Api.userRegister(user).then(function(){
+          //callback function
+        })
+        break;
 
       case 2:
       

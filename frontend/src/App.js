@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import Header from "./components/commons/Header";
-import Footer from "./components/commons/Footer"
+import Navigation from "./components/commons/Navigation";
 import OffersList from "./components/OffersList";
 import UserProfile from "./components/UserProfile";
-import SignUpPage from "./components/signUp/SignUpPage";
-import SignAllPage from "./components/signUp/SignAllPage";
+import SignAllPage from "./components/SignAllPage";
 import OfferPage from "./components/OfferPage";
 import { BrowserRouter, Route } from "react-router-dom";
 import { connect } from "react-redux";
@@ -20,16 +18,14 @@ class App extends Component {
     return (
         <BrowserRouter>
           <React.Fragment>
-            <Header />
-            <div className="container">
+            <Navigation />
+            <div className="right-panel">
               <Route exact path="/" component={OffersList} />
               <Route path="/page/:pageNumber" component={OffersList} />
               <Route path="/offer/:offerId" component={OfferPage} />
-              <Route path="/userProfile/:userId" component={UserProfile} />
-              <Route path="/signUp" component={SignUpPage} />
+              <Route path="/user/:userId" component={UserProfile} />
               <Route path="/session/new" component={SignAllPage} />
             </div>
-            <Footer />
           </React.Fragment>
         </BrowserRouter>
     );

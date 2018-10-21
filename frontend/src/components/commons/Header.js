@@ -52,14 +52,20 @@ class Header extends Component {
             open={open}
             onClose={this.handleClose}
           >
-            <MenuItem onClick={(event) => {this.props.history.push('/userProfile/fef'); this.handleClose()}}>Profile</MenuItem>
+            <MenuItem onClick={(event) => {this.props.history.push('/user/fef'); this.handleClose()}}>
+              <NavLink to="/userProfile/fjf" style={{ textDecoration: 'none', color: 'unset' }}>
+                Il mio profilo
+              </NavLink>
+            </MenuItem>
             <MenuItem onClick={(event) => {this.props.signOut(); this.handleClose()}}>Sign out</MenuItem>
           </Menu>
         </div>
       } else {
         this.loginButton =
-        <Button color="primary" variant="outlined" onClick={this.props.signIn}>
-          Login
+        <Button color="primary">
+          <NavLink to="/session/new" style={{ textDecoration: 'none', color: 'unset' }}>
+            Accedi
+          </NavLink>
         </Button>
       }
 

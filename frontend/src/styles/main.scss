@@ -3,28 +3,44 @@
 body{
   font-family: 'Roboto', sans-serif;
   background: $background-gray !important;
+  color: $dark-gray !important;
 }
 
-.container{
-    margin: 20px auto;
-    max-width: $larghezza-massima;
+.right-panel{
+  display: block;
+  float: left;
+  width: 100%;
+
+  @media screen and (min-width: 1024px){
+    margin-left: 25%;
+    width: 75%
+  }
 }
 
-.full-width{
-    width: 100%;
-}
 
 // Da qui in giù sono aposto
 
 .impaginatore{
   margin-top: 50px !important;
   width: 100%;
-  max-width: 640px;
+  max-width: 660px;
   margin: auto;
+  padding: 0 10px 0 10px;
 }
 
 h1{
   font-weight: bold !important;
   color: $normal-gray !important;
   margin-bottom: 50px !important;
+}
+
+h3{
+  width: auto !important;
+  font-size: 17px !important;
+  text-transform: uppercase;
+  font-weight: 700 !important;
+  line-height: 20px;
+  color: $dark-gray;
+  vertical-align: middle;
+  padding: 4px 0;
 }

@@ -104,6 +104,7 @@ class OffertaSingola extends Component {
               <IconButton
                 classes={{root: "bottone-like up"}}
                 onClick={(e) => this.handleHeat(e, 'cold')}
+                style={{visibility: this.state.userHasCold ? 'hidden' : 'visible'}}
               >
                 <KeyboardArrowDown fontSize="small"/>
               </IconButton >
@@ -111,6 +112,7 @@ class OffertaSingola extends Component {
               <IconButton
                 classes={{root: "bottone-like down"}}
                 onClick={(e) => this.handleHeat(e, 'heat')}
+                style={{visibility: this.state.userHasHeat ? 'hidden' : 'visible'}}
               >
                 <KeyboardArrowUp fontSize="small"/>
               </IconButton>

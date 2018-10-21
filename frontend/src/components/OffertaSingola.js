@@ -16,7 +16,7 @@ class OffertaSingola extends Component {
   state = {
     userHasHeat: false,
     userHasCold: false,
-    userId: this.props.user.id,
+    userId: ((this.props.user) ? this.props.user.id : null),
     offerId: this.props.offer.id,
     heat: this.props.offer.heatCount
   };

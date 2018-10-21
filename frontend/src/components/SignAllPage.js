@@ -44,8 +44,8 @@ export default class SignAllPage extends Component {
       case 0:
         if (user.email && user.password){
           Api.userAuthenticate(user).then(response =>{
-            response.data ? Store.setUser(response.data) : Store.setUser(null);
-            //Maybe redirect here?
+            response ? Store.setUser(response.data) : Store.setUser(null);
+            window.location.href = "/"
           })
         }
         break;

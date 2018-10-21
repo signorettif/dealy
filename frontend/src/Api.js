@@ -44,6 +44,17 @@ class Api {
             }.bind(this));
     }
 
+    static userLogout() {
+        axios.get(API_ROUTE+'/logout')
+            .then(function (response) {
+                Store.setUser(null);
+                this.handleResponse(response);
+            }.bind(this))
+            .catch(function (error) {
+                this.handleError(error);;
+            }.bind(this));
+    }
+
     static userRegister(data) {
         return axios.post(API_ROUTE+'/createUser', this.dataToFormdata(data))
             .then(function (response) {

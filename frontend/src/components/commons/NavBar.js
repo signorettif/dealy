@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { NavLink } from 'react-router-dom';
 import _ from "lodash";
-import Emoji from "./Emoji"
+import Emoji from "./Emoji";
+import Store from "../../Store";
+import Api from "../../Api";
 
 // Style
 import { Typography,MenuItem, Button, IconButton, Menu } from '@material-ui/core';
@@ -12,6 +14,7 @@ export default class NavBar extends Component {
 
   state = {
     anchorEl: null,
+    user: Store.getUser()
   };
 
   handleMenu = event => {
@@ -24,10 +27,11 @@ export default class NavBar extends Component {
 
   render() {
     const { anchorEl } = this.state;
+    const { user } = this.state;
     const open = Boolean(anchorEl);
 
 
-    if (true) {
+    if (user) {
         this.loginButton =
         <div>
           <IconButton
@@ -57,7 +61,7 @@ export default class NavBar extends Component {
                 Il mio profilo
               </NavLink>
             </MenuItem>
-            <MenuItem onClick={(event) => {this.props.signOut(); this.handleClose()}}>Sign out</MenuItem>
+            <MenuItem onClick={(event) => {Api.userLogout(); this.handleClose()}}>Sign out</MenuItem>
           </Menu>
         </div>
       } else {
@@ -96,7 +100,7 @@ export default class NavBar extends Component {
           </Typography>
 
           <ul>
-            <li className="sidebar-item">Login</li>
+            <li className="sidebar-item">{this.loginButton}</li>
           </ul>
         </div>
 

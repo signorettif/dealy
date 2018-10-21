@@ -127,10 +127,10 @@ class Api {
     static hasHeat(offerId, userId, type) {
         return axios.get(API_ROUTE+'/hasHeat?offer_id='+offerId+'&user_id='+userId+'&type='+type)
         .then(function (response) {
-            console.log(response);
+            return response;
         })
         .catch(function (error) {
-            console.log(error);
+            return error;
         });
     }
 

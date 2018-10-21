@@ -7,14 +7,79 @@
   background-color: white;
   border-radius: 8px !important;
   border: 0;
-  height: 64px;
-  padding: 0 30px;
+  padding: 20px;
   box-shadow: 0 3px 5px 2px rgba(214, 214, 214, .3);
   overflow: hidden;
-  padding: 16px;
   display: flex;
   align-items: center;
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+
+  .immagine-offerta{
+    display: flex;
+    vertical-align: middle;
+    margin-right: 20px;
+    flex-shrink: 0;
+
+    .img-circle{
+      display: block;
+      border-radius: 50%;
+      height: 60px;
+      width: 60px;
+      overflow: hidden;
+      background-position: center center;
+      background-size: cover;
+    }
+  }
+
+  .main-content{
+    flex-grow: 1;
+
+    .titolo-offerta {
+      font-size: 17px;
+      color: $dark-gray;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .luogo-offerta  {
+      font-size: 15px;
+      color: $medium-gray;
+    }
+  }
+
+  .right-info{
+    flex-shrink: 0;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    margin-left: 20px;
+
+    .prezzi{
+      color: $medium-gray;
+      font-size: 15px;
+      margin-bottom: 10px;
+
+      .originale{
+        font-size: 12px;
+        text-decoration: line-through;
+        margin-right: 4px;
+      }
+
+      .scontato{
+        color: $primary-color;
+        font-weight: 500;
+      }
+    }
+
+    .heat-count{
+      background-color: $light-gray;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 0 12px;
+      line-height: 28px;
+      border-radius: 14px;
+    }
+  }
 
   &:hover{
     background: white;
@@ -29,6 +94,7 @@
         margin-top: -23px;
         color: $hot-red;
       }
+
       &::after {
         margin-top: 22px;
         color: $primary-blue;
@@ -36,70 +102,44 @@
     }
   }
 
-  .heat-count-circle{
-    flex-shrink:0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 100%;
-    margin: 0 24px 0 4px;
-    height: 28px;
-    width: 28px;
-    background-color: #e0e0e0;
-    text-align: center;
-    vertical-align: middle;
-    font-size: 12px;
-    font-weight: bold;
+  &.is-hot{
+    background-color: none;
+    background: $primary-gradient;
+    color: white !important;
+    box-shadow: rgba(255, 105, 135, .3);
 
-    color: $dark-gray;
-
-    &.isHot{
-      background-color: $hot-red;
-      color: white;
+    *{
+      color: white !important;
     }
 
-    &.isCold{
-      background-color: $primary-blue;
-      color: white;
+    .originale, .luogo-offerta{
+      opacity: .6;
     }
 
-    &::before {
-      position: absolute;
-      transition: all .2s linear;
-      margin-top: -16px;
-      content: "+";
-      color: transparent;
-    }
-
-    &::after {
-      position: absolute;
-      transition: all .2s linear;
-      margin-top: 15px;
-      content: "-";
-      color: transparent;
-    }
-
-  }
-
-  .titolo-offerta{
-    font-size: 16px;
-    color: $dark-gray;
-    flex-grow: 1;
-  }
-
-  .prezzi{
-    flex-shrink:0;
-    color: $normal-gray;
-    text-align: center;
-    padding-left: 24px;
-
-    * {
-      display: block;
-    }
-
-    .originale{
-      font-size: 12px;
-      text-decoration: line-through;
+    .heat-count{
+      background: white;
+      color: $primary-color !important;
     }
   }
+
+  &.is-cold{
+    background-color: none;
+    background: $cold-gradient;
+    color: white !important;
+    box-shadow: rgba(33, 203, 243, .3);
+
+    *{
+      color: white !important;
+    }
+
+    .originale, .luogo-offerta{
+      opacity: .6;
+    }
+
+    .heat-count{
+      background: white;
+      color: $cold-color !important;
+    }
+  }
+
 }

@@ -67,7 +67,8 @@ class Header extends Component {
             Accedi
           </NavLink>
         </Button>
-      }
+    }
+
 
     return (
       <AppBar position="relative" color="default" className="top">

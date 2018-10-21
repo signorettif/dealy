@@ -15,24 +15,37 @@ class OffertaSingola extends Component {
     const { offer } = this.props;
 
     var hotStatus = classNames({
-      'isHot': offer.heatCount > 2,
-      'isCold': offer.heatCount < 2
+      'is-hot': offer.heatCount > 100,
+      'is-cold': offer.heatCount < -100
     });
 
     return(
       <NavLink to={"/offer/" + offer.id } style={{ textDecoration: 'none', color: 'unset' }}>
-        <div className="carta-offerta" fullWidth>
-          <div className={"heat-count-circle " + hotStatus}>
-            {offer.heatCount}
-          </div>
-          <Typography variant="body2" className="titolo-offerta">
-            {offer.title}
-          </Typography>
-          <div className="prezzi">
-            <span className="originale" visibility={(offer.originalAmount=="") ? "visible" : "hidden"}> {offer.originalAmount} € </span>
-            <span className="scontato"> {offer.discountedAmount} € </span>
+        <div className={"carta-offerta " + hotStatus}>
+          <div className="immagine-offerta">
+            <div
+              style= {{backgroundImage: 'url(' + offer.downloadURL + ')'}}
+              className="img-circle" />
           </div>
 
+          <div className = 'main-content'>
+            <Typography className="titolo-offerta">
+              {offer.title}
+            </Typography>
+            <Typography className="luogo-offerta">
+              {offer.vendor}
+            </Typography>
+          </div>
+
+          <div className='right-info'>
+            <div className="prezzi">
+              <span className="originale"> {offer.originalAmount}€</span>
+              <span className="scontato"> {offer.discountedAmount}€</span>
+            </div>
+            <div className='heat-count'>
+              {offer.heatCount}°
+            </div>
+          </div>
         </div>
       </NavLink>
     )

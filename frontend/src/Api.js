@@ -111,6 +111,18 @@ class Api {
           });
     }
 
+    //Heat handlers
+    static heatHandler(offerId, user, direction) {
+        axios.post(API_ROUTE+'/editOfferHeat?id='+offerId+'&direction='+direction)
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    }
+
+
 
 
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddHeatTable extends Migration
+class FixHeatTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,6 +13,7 @@ class AddHeatTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('users_offers_likes');
 
         Schema::create('users_offers_heat', function (Blueprint $table) {
             $table->integer('user_id')->unsigned();
@@ -20,6 +21,7 @@ class AddHeatTable extends Migration
             $table->integer('offer_id')->unsigned();
             $table->foreign('offer_id')->references('id')->on('offers');
             $table->primary(['user_id', 'offer_id']);
+            $table->string('type');
             $table->timestamps();
         });
     }

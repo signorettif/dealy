@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Offer; //Customize with the model of your controller
+use App\Heats;
 use Illuminate\Http\Request;
 use App\Http\Controllers\DB;
 use Carbon\Carbon;
@@ -21,6 +22,7 @@ class OfferController extends Controller
         'voucher' => 'nullable',
         'heatCount' => 'nullable',
         'downloadURL' => 'nullable',
+        'vendor' => 'nullable',
         ]);
 
       $offer = Offer::create([
@@ -32,7 +34,8 @@ class OfferController extends Controller
         'description' => $validatedData['description'],
         'voucher' => $validatedData['voucher'],
         'downloadURL' => $validatedData['downloadURL'],
-        'heatCount' => $validatedData['heatCount']
+        'heatCount' => $validatedData['heatCount'],
+        'vendor' => $validatedData['vendor'],
       ]);
     }
 
@@ -73,13 +76,22 @@ class OfferController extends Controller
   public function handleOfferHeat(Request $request)
   {
     $offer_id = $request['offer_id'];
-    $direction = $request['direction'];
+    $user_id = $request['user_id'];
+    $type = $request['type'];
 
-    if ($direction == 'up') {
-      $offer = Offer::find($id)->increment('heatCount');
+    if ($type == 'heat') {
+      $offer = Offer::find($offer_id)->increment('heatCount');
     }
 
-    return $offer->toJson();
+    if ($type == 'cold') {
+      $offer = Offer::find($offer_id)->decrement('heatCount');
+    }
+
+    Heats::create([
+      'user_id' => $user_id,
+      'offer_id' => $offer_id,
+      'type' => $type
+    ]);
   }
 
 }

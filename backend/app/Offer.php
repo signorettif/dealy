@@ -15,11 +15,16 @@ class Offer extends Model
         'description',
         'voucher',
         'heatCount',
-        'downloadURL'
+        'downloadURL',
+        'vendor'
     ];
 
     public function user()
     {
         return $this->belongsTo('App\User');
     }
+
+    public function heat(){
+        return $this->hasMany('App\Heats');
+      }
 }

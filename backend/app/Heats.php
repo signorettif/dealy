@@ -2,29 +2,18 @@
 
 namespace App;
 
-use Laravel\Passport\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-
-class User extends Authenticatable
+class Heats extends Model
 {
-    use HasApiTokens, Notifiable;
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 
-        'surname',
-        'username',
-        'email', 
-        'password', 
-        'role',
-        'profile_img'
+        'user_id', 
+        'offer_id',
     ];
 
     public static function generateVerificationToken()
@@ -52,23 +41,14 @@ class User extends Authenticatable
         'profile_img' => 'string',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token'
-    ];
 
-
-    public function offers()
+    public function offer()
     {
-        return $this->hasMany('App\Offer');
+        return $this->belongsTo('App\Offer');
     }
 
-    public function heats()
+    public function user()
     {
-        return $this->hasMany('App\Heats');
+        return $this->belongsTo('App\User');
     }
 }

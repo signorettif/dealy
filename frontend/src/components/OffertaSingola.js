@@ -22,12 +22,11 @@ class OffertaSingola extends Component {
     return(
       <NavLink to={"/offer/" + offer.id } style={{ textDecoration: 'none', color: 'unset' }}>
         <div className={"carta-offerta " + hotStatus}>
-          <div className="immagine-offerta">
-            <div
-              style= {{backgroundImage: 'url(' + offer.downloadURL + ')'}}
-              className="img-circle" />
-          </div>
-
+          {(offer.downloadURL) ?
+            <div className="immagine-offerta">
+              <div style= {{backgroundImage: 'url(' + offer.downloadURL + ')'}} className="img-circle" />
+            </div>
+          : null}
           <div className = 'main-content'>
             <Typography className="titolo-offerta">
               {offer.title}
@@ -39,7 +38,7 @@ class OffertaSingola extends Component {
 
           <div className='right-info'>
             <div className="prezzi">
-              <span className="originale"> {offer.originalAmount}€</span>
+              {(offer.originalAmount) ? <span className="originale"> {offer.originalAmount}€</span> : null}
               <span className="scontato"> {offer.discountedAmount}€</span>
             </div>
             <div className='heat-count'>

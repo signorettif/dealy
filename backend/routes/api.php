@@ -37,4 +37,6 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'],  function() {
     Route::get('lastOffers', 'OfferController@lastOffers');
     Route::post('offers', 'OfferController@store');
     Route::get('offers/{id}', 'OfferController@getOfferByID');
+    Route::post('editOfferHeat', 'OfferController@handleOfferHeat');
+    Route::post('addHeat', 'HeatsController@editHeats');
 });

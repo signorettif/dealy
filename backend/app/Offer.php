@@ -22,4 +22,8 @@ class Offer extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function heat(){
+        return $this->hasMany('App\Heats');
+      }
 }

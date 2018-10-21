@@ -72,14 +72,16 @@ class OfferController extends Controller
 
   public function handleOfferHeat(Request $request)
   {
-    $offer_id = $request['offer_id'];
+    $id = $request['id'];
     $direction = $request['direction'];
 
     if ($direction == 'up') {
       $offer = Offer::find($id)->increment('heatCount');
     }
 
-    return $offer->toJson();
+    if ($direction == 'down') {
+      $offer = Offer::find($id)->decrement('heatCount');
+    }
   }
 
 }

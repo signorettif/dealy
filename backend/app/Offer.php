@@ -15,7 +15,8 @@ class Offer extends Model
         'description',
         'voucher',
         'heatCount',
-        'downloadURL'
+        'downloadURL',
+        'vendor'
     ];
 
     public function user()

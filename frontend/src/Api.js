@@ -115,9 +115,9 @@ class Api {
 
     //Heat handlers
     static addHeat(offerId, userId, type) {
-        axios.post(API_ROUTE+'/addHeat?offer_id='+offerId+'&user_id='+userId+'&type='+type)
+        return axios.post(API_ROUTE+'/addHeat?offer_id='+offerId+'&user_id='+userId+'&type='+type)
         .then(function (response) {
-            console.log(response);
+            return (response);
         })
         .catch(function (error) {
             console.log(error);

@@ -17,7 +17,8 @@ class OffertaSingola extends Component {
     userHasHeat: false,
     userHasCold: false,
     userId: this.props.user.id,
-    offerId: this.props.offer.id
+    offerId: this.props.offer.id,
+    heat: this.props.offer.heatCount
   };
 
   componentWillMount() {
@@ -41,21 +42,28 @@ class OffertaSingola extends Component {
 
     const {userId} = this.state
     const {offerId} = this.state
+    const {heat} = this.state
 
     // console.log('Heat: '+this.state.userHasHeat+', Cold: '+this.state.userHasCold)
 
     if(this.state.userHasHeat && userId && (type=='cold')){
       Api.deleteHeat(offerId, userId, 'heat').then(() =>{
-        this.setState({userHasHeat: false, userHasCold: true});
-        Api.addHeat(offerId, userId, type)
+        Api.addHeat(offerId, userId, type).then(response => {
+          this.setState({userHasHeat: false, userHasCold: true, heat: response.data});
+        }) 
       })
     } else if (this.state.userHasCold && userId && (type=='heat')) {
       Api.deleteHeat(offerId, userId, 'cold').then(() =>{
-        this.setState({userHasCold: false, userHasHeat: true});
-        Api.addHeat(offerId, userId, type);
+        Api.addHeat(offerId, userId, type).then(response => {
+          this.setState({userHasHeat: true, userHasCold: false, heat: response.data});
+        }) 
       })
     }else if (userId) {
-      Api.addHeat(offerId, userId, type)
+      const isHot = (type=='heat') ? true : false;
+
+      Api.addHeat(offerId, userId, type).then(response => {
+        this.setState({userHasHeat: isHot, userHasCold: !isHot, heat: response.data});
+      }) 
     }
 
     // console.log('Heat: '+this.state.userHasHeat+', Cold: '+this.state.userHasHeat)
@@ -99,10 +107,10 @@ class OffertaSingola extends Component {
               >
                 <KeyboardArrowDown fontSize="small"/>
               </IconButton >
-              {offer.heatCount}°
+              {this.state.heat}°
               <IconButton
                 classes={{root: "bottone-like down"}}
-                onClick={(e) => this.handleHeat(e, 'down')}
+                onClick={(e) => this.handleHeat(e, 'heat')}
               >
                 <KeyboardArrowUp fontSize="small"/>
               </IconButton>

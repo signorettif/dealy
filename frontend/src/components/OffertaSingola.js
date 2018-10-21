@@ -4,15 +4,28 @@ import { NavLink } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import _ from "lodash";
 import * as actions from "../actions";
+import Api from '../Api';
+import Store from '../Store';
 
 // Style
 import { Typography } from '@material-ui/core';
 import "../styles/offertaSingola.scss"
 
 class OffertaSingola extends Component {
+  state = {
+    userHasHeat: false,
+    userHasCold: false
+  };
+
+  componentWillMount() {
+    Api.hasHeat(this.props.offer.id, Store.getUser().id, 'heat').then(response => {
+      console.log(response.data)
+    })
+  }
 
   render() {
     const { offer } = this.props;
+
 
     var hotStatus = classNames({
       'is-hot': offer.heatCount > 100,

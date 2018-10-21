@@ -8,7 +8,7 @@ import Api from '../Api';
 import Store from '../Store';
 
 // Style
-import { Button, Typography } from '@material-ui/core';
+import { IconButton, Typography } from '@material-ui/core';
 import { KeyboardArrowUp, KeyboardArrowDown } from '@material-ui/icons';
 import "../styles/offertaSingola.scss"
 
@@ -34,20 +34,6 @@ class OffertaSingola extends Component {
     });
 
     return(
-      <div className="bottoni-farlocco">
-        <div className="bottoni-container">
-          <Button
-            className="{classes.floatButton}"
-          >
-            <KeyboardArrowUp />
-          </Button>
-          <Button
-            className="{classes.floatButton}"
-          >
-            <KeyboardArrowDown />
-          </Button>
-        </div>
-
         <NavLink to={"/offer/" + offer.id } style={{ textDecoration: 'none', color: 'unset' }}>
           <div className={"carta-offerta " + hotStatus}>
             {(offer.downloadURL) ?
@@ -66,16 +52,25 @@ class OffertaSingola extends Component {
 
             <div className='right-info'>
               <div className="prezzi">
-                {(offer.originalAmount) ? <span className="originale"> {offer.originalAmount}€</span> : null}
-                <span className="scontato"> {offer.discountedAmount}€</span>
+                {(offer.originalAmount) ? <p className="originale"> {offer.originalAmount}€</p> : null}
+                <p className="scontato"> {offer.discountedAmount}€</p>
               </div>
               <div className='heat-count'>
+                <IconButton
+                  classes={{root: "bottone-like up"}}
+                >
+                  <KeyboardArrowDown fontSize="small"/>
+                </IconButton >
                 {offer.heatCount}°
+                <IconButton
+                  classes={{root: "bottone-like down"}}
+                >
+                  <KeyboardArrowUp fontSize="small"/>
+                </IconButton>
               </div>
             </div>
           </div>
         </NavLink>
-      </div>
     )
 
   }

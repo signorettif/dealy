@@ -1,5 +1,6 @@
 @import "variables";
 
+// Per desktop in futuro
 .bottoni-farlocco{
   position: relative;
   display: block;
@@ -10,7 +11,6 @@
     position: absolute;
     margin-left: -50px;
     height: 100%;
-    width: 30px;
 
     display: flex;
     flex-direction: column;
@@ -19,14 +19,16 @@
   }
 
   &:hover{
+    .carta-offerta{
 
+    }
   }
 }
 
 .carta-offerta{
   display: block;
   width: 100%;
-  margin-bottom: 10px !important;
+  margin-bottom: 12px !important;
   background-color: white;
   border-radius: 8px !important;
   border: 0;
@@ -82,6 +84,12 @@
       font-size: 15px;
       margin-bottom: 10px;
 
+      p{
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+      }
+
       .originale{
         font-size: 12px;
         text-decoration: line-through;
@@ -95,43 +103,45 @@
     }
 
     .heat-count{
+      display: flex;
+      vertical-align: middle;
+      justify-content: center;
       background-color: $light-gray;
       font-size: 15px;
       font-weight: 500;
-      padding: 0 12px;
+      padding: 0 6px;
       line-height: 28px;
       border-radius: 14px;
+
+
+      .bottone-like{
+        display: inline-block;
+        padding: 2px;
+        margin: auto;
+        color: $medium-gray;
+
+        &.up{
+          margin-right: 4px;
+        }
+
+        &.down{
+          margin-left: 2px;
+        }
+      }
     }
   }
 
   &:hover{
-    background: white;
-    border-color: white;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.06), 0 3px 6px rgba(0,0,0,0.13);
     transform: scale(1.02);
     -webkit-backface-visibility: hidden;
-
-    .heat-count-circle{
-      &::before {
-        position: absolute;
-        margin-top: -23px;
-        color: $hot-red;
-      }
-
-      &::after {
-        margin-top: 22px;
-        color: $primary-blue;
-      }
-    }
   }
 
   &.is-hot{
     background-color: none;
     background: $primary-gradient;
-    color: white !important;
     box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
 
-    *{
+    p{
       color: white !important;
     }
 
@@ -142,16 +152,19 @@
     .heat-count{
       background: white;
       color: $primary-color !important;
+
+      .bottone-like{
+        color: $primary-color !important;
+      }
     }
   }
 
   &.is-cold{
     background-color: none;
     background: $cold-gradient;
-    color: white !important;
     box-shadow: 0 3px 5px 2px rgba(33, 203, 243, .3);
 
-    *{
+    p{
       color: white !important;
     }
 
@@ -162,6 +175,10 @@
     .heat-count{
       background: white;
       color: $cold-color !important;
+
+      .bottone-like{
+        color: $cold-color !important;
+      }
     }
   }
 

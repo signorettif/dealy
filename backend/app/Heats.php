@@ -11,34 +11,19 @@ class Heats extends Model
      *
      * @var array
      */
+
+    protected $table = 'users_offers_heat';
+
     protected $fillable = [
         'user_id', 
         'offer_id',
+        'type'
     ];
-
-    public static function generateVerificationToken()
-    {
-       return str_random(40);
-    }
 
     public static $validatorCreate = [
-        'name' => 'string',
-        'surname' => 'string',
-        'username' => 'required|string|unique:users,username',
-        'email' => 'required|email|unique:users,email',
-        'password' => 'required|string|min:6',
-        'role' => 'integer',
-        'profile_img' => 'string',
-    ];
-
-    public static $validatorUpdate = [
-        'name' => 'string',
-        'surname' => 'string',
-        'username' => 'string|unique:users,username',
-        'email' => 'email|unique:users,email',
-        'password' => 'min:6',
-        'role' => 'integer',
-        'profile_img' => 'string',
+        'user_id' => 'integer|required',
+        'offer_id' => 'integer|required',
+        'type' => 'string|required',
     ];
 
 
@@ -51,4 +36,5 @@ class Heats extends Model
     {
         return $this->belongsTo('App\User');
     }
+
 }

@@ -29,7 +29,7 @@ Route::group(['prefix' => 'v1'], function() {
     Route::post('password/change', 'PassportController@changePassword')->middleware('auth:api');
 });
 
-//Get offers, no auth needed (for now all of them are present)
+//Offers routes, no auth needed (for now all of them are present)
 Route::group(['prefix' => 'v1', 'middleware' => 'cors'],  function() {
     Route::get('offers', 'OfferController@index');
     Route::get('offersUser', 'OfferController@userCreator');
@@ -37,6 +37,11 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'],  function() {
     Route::get('lastOffers', 'OfferController@lastOffers');
     Route::post('offers', 'OfferController@store');
     Route::get('offers/{id}', 'OfferController@getOfferByID');
-    Route::post('handleOfferHeat', 'OfferController@handleOfferHeat');
-    Route::get('hasHeat', 'HeatsController@hasHeats');
+});
+
+//Heats routes, no auth needed (for now all of them are present)
+Route::group(['prefix' => 'v1', 'middleware' => 'cors'],  function() {
+    Route::post('addHeat', 'OfferController@addHeat');
+    Route::get('hasHeat', 'HeatsController@hasHeat');
+    Route::get('deleteHeat', 'HeatsController@deleteHeat');
 });

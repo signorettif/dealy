@@ -73,7 +73,7 @@ class OfferController extends Controller
       return $offer->toJson();
   }
 
-  public function handleOfferHeat(Request $request)
+  public function addHeat(Request $request)
   {
     $offer_id = $request['offer_id'];
     $user_id = $request['user_id'];

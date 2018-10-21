@@ -25,9 +25,10 @@ class OffersList extends Component {
   // Renders the Offers list
   renderOffers() {
     const Offers = this.state.paginatedOffers
+    const user = this.state.user
     const exportOf = Offers.map((value, key) => {
       return(
-        <OffertaSingola offerId={key} offer={value} />
+        <OffertaSingola offerId={key} offer={value} user={user}/>
       )
     });
 

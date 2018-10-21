@@ -15,13 +15,47 @@ import "../styles/offertaSingola.scss"
 class OffertaSingola extends Component {
   state = {
     userHasHeat: false,
-    userHasCold: false
+    userHasCold: false,
+    userId: this.props.user.id,
+    offerId: this.props.offer.id
   };
 
   componentWillMount() {
-    Api.hasHeat(this.props.offer.id, Store.getUser().id, 'heat').then(response => {
-      console.log(response.data)
-    })
+    const {userId} = this.state
+    const {offerId} = this.state
+
+    if(userId){
+      Api.hasHeat(offerId, userId, 'heat').then(response => {
+        this.setState({userHasHeat: response.data});
+      })
+
+      Api.hasHeat(offerId, userId, 'cold').then(response => {
+        this.setState({userHasCold: response.data});
+      })
+    }
+  }
+
+  handleHeat = type => {
+    const {userId} = this.state
+    const {offerId} = this.state
+
+    // console.log('Heat: '+this.state.userHasHeat+', Cold: '+this.state.userHasCold)
+    
+    if(this.state.userHasHeat && userId && (type=='cold')){
+      Api.deleteHeat(offerId, userId, 'heat').then(() =>{
+        this.setState({userHasHeat: false, userHasCold: true});
+        Api.addHeat(offerId, userId, type)
+      })
+    } else if (this.state.userHasCold && userId && (type=='heat')) {
+      Api.deleteHeat(offerId, userId, 'cold').then(() =>{
+        this.setState({userHasCold: false, userHasHeat: true});
+        Api.addHeat(offerId, userId, type);
+      })
+    }else if (userId) {
+      Api.addHeat(offerId, userId, type)
+    }
+
+    // console.log('Heat: '+this.state.userHasHeat+', Cold: '+this.state.userHasHeat)
   }
 
   render() {
@@ -38,11 +72,13 @@ class OffertaSingola extends Component {
         <div className="bottoni-container">
           <Button
             className="{classes.floatButton}"
+            onClick={() => this.handleHeat('heat')}
           >
             <KeyboardArrowUp />
           </Button>
           <Button
             className="{classes.floatButton}"
+            onClick={() => this.handleHeat('cold')}
           >
             <KeyboardArrowDown />
           </Button>

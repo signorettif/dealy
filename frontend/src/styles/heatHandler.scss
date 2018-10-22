@@ -1,0 +1,29 @@
+@import "variables";
+
+.heat-count{
+  display: flex;
+  vertical-align: middle;
+  justify-content: center;
+  background-color: $light-gray;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 0 6px;
+  line-height: 28px;
+  border-radius: 14px;
+
+
+  .bottone-like{
+    display: inline-block;
+    padding: 2px;
+    margin: auto;
+    color: $medium-gray;
+
+    &.up{
+      margin-right: 4px;
+    }
+
+    &.down{
+      margin-left: 2px;
+    }
+  }
+}

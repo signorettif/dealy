@@ -1,17 +1,23 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { withRouter } from "react-router";
+import { NavLink } from "react-router-dom";
 import _ from "lodash";
 import * as actions from "../actions";
 import {PAGINATION_LENGTH} from "../config/globals";
+
+// Components
 import OffertaSingola from "./OffertaSingola";
 import NuovaOfferta from "./NuovaOfferta";
 import LoginAlertDialogue from "./commons/LoginAlertDialogue";
 import Sidebar from "./Sidebar";
-import { Button, Grid, Typography } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
+
+// Api
 import Api from '../Api';
 import Store from '../Store';
 
+// Style
+import { Button, Grid, Typography } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
 import "../styles/offersList.scss"
 
 class OffersList extends Component {
@@ -28,7 +34,14 @@ class OffersList extends Component {
     const user = this.state.user
     const exportOf = Offers.map((value, key) => {
       return(
-        <OffertaSingola offerId={key} offer={value} user={user}/>
+        <NavLink
+          to={{
+            pathname: "/offer/"+ value.id,
+            state: { open: true, data: value },
+          }}
+        >
+          <OffertaSingola offerId={key} offer={value} user={user}/>
+        </NavLink>
       )
     });
 
@@ -40,7 +53,7 @@ class OffersList extends Component {
   }
 
   componentWillMount() {
-    const pageNumber = (this.props.match.params.pageNumber ? this.props.match.params.pageNumber : 1);
+    const pageNumber = 1;
 
     Api.getPaginatedOffers(PAGINATION_LENGTH, pageNumber).then(response =>{
       this.handleOffersUpdate(response.data);
@@ -106,11 +119,4 @@ class OffersList extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    data: state.data,
-    authenticated: state.auth
-  };
-};
-
-export default connect(mapStateToProps, actions)(OffersList);
+export default withRouter(OffersList);

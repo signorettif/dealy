@@ -42,13 +42,13 @@ class OfferPage extends Component {
           <img src={imageURL} style={{visibility: 'hidden'}} />
         </CardMedia>
         <CardContent>
-          <Typography variant="h5" component="h2">
+          <Typography variant="h5">
             <a href={data.link} target="_blank">{data.title}</a>
           </Typography>
-          <Typography gutterBottom color="textSecondary">
-          {data.discountedAmount} {data.originalAmount} {data.time}
+          <Typography>
+          {data.discountedAmount} {data.originalAmount}
           </Typography>
-          <Typography component="p">
+          <Typography>
             {data.description}
           </Typography>
         </CardContent>

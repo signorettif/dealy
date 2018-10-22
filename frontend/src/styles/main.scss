@@ -30,10 +30,22 @@ body{
   padding: 0 10px 0 10px;
 }
 
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
 h1{
   font-weight: bold !important;
   color: $normal-gray !important;
   margin-bottom: 50px !important;
+}
+
+h2{
+  font-weight: bold !important;
+  font-size: 24px !important;
+  line-height: 36px!important;
+  font-family: 'Montserrat', sans-serif !important;
 }
 
 h3{
@@ -45,4 +57,14 @@ h3{
   color: $dark-gray;
   vertical-align: middle;
   padding: 4px 0;
+}
+
+.action-button-primary{
+  background: $primary-gradient;
+  border-radius: 8px !important;
+  border: 0;
+  color: white !important;
+  height: 64px;
+  padding: 0 30px;
+  box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
 }

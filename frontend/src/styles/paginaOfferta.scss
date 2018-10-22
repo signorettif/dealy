@@ -1,0 +1,72 @@
+@import "variables";
+
+.drawer-container{
+  max-width: 50%;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  .central-content{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .top-content{
+      display: flex;
+      margin-bottom: 20px;
+      align-items: center;
+
+      .immagine-offerta{
+        display: flex;
+        vertical-align: middle;
+        margin-right: 20px;
+        flex-shrink: 0;
+
+        .img-circle{
+          display: block;
+          border-radius: 50%;
+          height: 60px;
+          width: 60px;
+          overflow: hidden;
+          background-position: center center;
+          background-size: cover;
+        }
+      }
+    }
+
+    .descrizione{
+      font-size: 17px;
+      line-height: 30px;
+      color: $medium-gray;
+    }
+  }
+
+  .bottom-content{
+    .prezzi{
+      margin-bottom: 30px;
+
+      p{
+        display: inline-block;
+        font-size: 26px;
+        margin: 0;
+        padding: 0;
+        margin-left: 20px;
+      }
+
+      .originale{
+        text-decoration: line-through;
+        color: $normal-gray;
+      }
+
+      .scontato{
+        font-weight: bold;
+      }
+    }
+
+    .action-button-primary{
+      width: 100%;
+    }
+  }
+}

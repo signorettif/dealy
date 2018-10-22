@@ -96,7 +96,9 @@ export default class NavBar extends Component {
           </Typography>
 
           <ul>
-            <li className="sidebar-item">Login</li>
+            <li className="sidebar-item"><NavLink to="/session/new" style={{ textDecoration: 'none', color: 'unset' }}>
+              Login
+            </NavLink></li>
           </ul>
         </div>
 

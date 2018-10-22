@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { NavLink } from 'react-router-dom';
+import { withRouter } from "react-router";
 import classNames from 'classnames/bind';
+import HeatHandler from './commons/HeatHandler';
 import _ from "lodash";
 import * as actions from "../actions";
 import Api from '../Api';
@@ -14,52 +14,9 @@ import "../styles/offertaSingola.scss"
 
 class OffertaSingola extends Component {
   state = {
-    userHasHeat: false,
-    userHasCold: false,
     userId: this.props.user.id,
     offerId: this.props.offer.id
   };
-
-  componentWillMount() {
-    const {userId} = this.state
-    const {offerId} = this.state
-
-    if(userId){
-      Api.hasHeat(offerId, userId, 'heat').then(response => {
-        this.setState({userHasHeat: response.data});
-      })
-
-      Api.hasHeat(offerId, userId, 'cold').then(response => {
-        this.setState({userHasCold: response.data});
-      })
-    }
-  }
-
-  handleHeat(e, type) {
-
-    e.preventDefault();
-
-    const {userId} = this.state
-    const {offerId} = this.state
-
-    // console.log('Heat: '+this.state.userHasHeat+', Cold: '+this.state.userHasCold)
-
-    if(this.state.userHasHeat && userId && (type=='cold')){
-      Api.deleteHeat(offerId, userId, 'heat').then(() =>{
-        this.setState({userHasHeat: false, userHasCold: true});
-        Api.addHeat(offerId, userId, type)
-      })
-    } else if (this.state.userHasCold && userId && (type=='heat')) {
-      Api.deleteHeat(offerId, userId, 'cold').then(() =>{
-        this.setState({userHasCold: false, userHasHeat: true});
-        Api.addHeat(offerId, userId, type);
-      })
-    }else if (userId) {
-      Api.addHeat(offerId, userId, type)
-    }
-
-    // console.log('Heat: '+this.state.userHasHeat+', Cold: '+this.state.userHasHeat)
-  }
 
   render() {
     const { offer } = this.props;
@@ -71,7 +28,6 @@ class OffertaSingola extends Component {
     });
 
     return(
-      <NavLink to={"/offer/" + offer.id } style={{ textDecoration: 'none', color: 'unset' }}>
         <div className={"carta-offerta " + hotStatus}>
           {(offer.downloadURL) ?
             <div className="immagine-offerta">
@@ -92,27 +48,11 @@ class OffertaSingola extends Component {
               {(offer.originalAmount) ? <p className="originale"> {offer.originalAmount}€</p> : null}
               <p className="scontato"> {offer.discountedAmount}€</p>
             </div>
-            <div className='heat-count'>
-              <IconButton
-                classes={{root: "bottone-like up"}}
-                onClick={(e) => this.handleHeat(e, 'cold')}
-              >
-                <KeyboardArrowDown fontSize="small"/>
-              </IconButton >
-              {offer.heatCount}°
-              <IconButton
-                classes={{root: "bottone-like down"}}
-                onClick={(e) => this.handleHeat(e, 'down')}
-              >
-                <KeyboardArrowUp fontSize="small"/>
-              </IconButton>
-            </div>
+            <HeatHandler offerId={offer.id} userId={this.state.userId}/>
           </div>
         </div>
-      </NavLink>
     )
-
   }
 }
 
-export default connect(null, actions)(OffertaSingola);
+export default withRouter(OffertaSingola)

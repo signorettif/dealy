@@ -14,7 +14,8 @@ export default class PaginaOfferta extends Component {
     super(props);
 
     this.state = {
-      data: []
+      data: [],
+      open: true
     };
   }
 

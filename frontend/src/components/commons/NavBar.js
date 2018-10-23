@@ -28,45 +28,32 @@ export default class NavBar extends Component {
 
 
     if (true) {
-        this.loginButton =
-        <div>
-          <IconButton
-            aria-owns={open ? 'menu-appbar' : null}
-            aria-haspopup="true"
-            onClick={this.handleMenu}
-            color="inherit"
+        this.loginMenu =
+        <ul>
+          <li className="sidebar-item"><NavLink
+            to="/user/fjf"
+            style={{ textDecoration: 'none', color: 'unset' }}
           >
-            <AccountCircle />
-          </IconButton>
-          <Menu
-            id="menu-appbar"
-            anchorEl={anchorEl}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            open={open}
-            onClose={this.handleClose}
+            Il mio profilo
+          </NavLink></li>
+          <li className="sidebar-item"><NavLink
+            onClick = {(event) => {this.props.signOut()}}
+            to="/session/new"
+            style={{ textDecoration: 'none', color: 'unset' }}
           >
-            <MenuItem onClick={(event) => {this.props.history.push('/user/fef'); this.handleClose()}}>
-              <NavLink to="/userProfile/fjf" style={{ textDecoration: 'none', color: 'unset' }}>
-                Il mio profilo
-              </NavLink>
-            </MenuItem>
-            <MenuItem onClick={(event) => {this.props.signOut(); this.handleClose()}}>Sign out</MenuItem>
-          </Menu>
-        </div>
+            Esci
+          </NavLink></li>
+        </ul>
       } else {
-        this.loginButton =
-        <Button color="primary">
-          <NavLink to="/session/new" style={{ textDecoration: 'none', color: 'unset' }}>
-            Accedi
-          </NavLink>
-        </Button>
+        this.loginMenu =
+        <ul>
+          <li className="sidebar-item"><NavLink
+            to="/session/new"
+            style={{ textDecoration: 'none', color: 'unset' }}
+          >
+            Login
+          </NavLink></li>
+        </ul>
     }
 
     return(
@@ -79,14 +66,14 @@ export default class NavBar extends Component {
 
         <div className="sidebar-section">
           <Typography className="section-heading">
-            Ordina per
+            Offerte
           </Typography>
 
           <ul>
             <li className="sidebar-item active">Più recenti</li>
-            <li className="sidebar-item">Più caldi</li>
+            <li className="sidebar-item">Più calde</li>
             <li className="sidebar-item">Trending</li>
-            <li className="sidebar-item">Raccomandati per te</li>
+            <li className="sidebar-item">Raccomandate per te</li>
           </ul>
         </div>
 
@@ -96,9 +83,7 @@ export default class NavBar extends Component {
           </Typography>
 
           <ul>
-            <li className="sidebar-item"><NavLink to="/session/new" style={{ textDecoration: 'none', color: 'unset' }}>
-              Login
-            </NavLink></li>
+            {this.loginMenu}
           </ul>
         </div>
 

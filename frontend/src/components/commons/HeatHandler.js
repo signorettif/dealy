@@ -14,7 +14,8 @@ export default class HeatHandler extends Component {
     userHasHeat: false,
     userHasCold: false,
     userId: this.props.userId,
-    offerId: this.props.offerId
+    offerId: this.props.offerId,
+    heatCount: this.props.heatCount
   };
 
   handleHeat(e, type) {
@@ -35,7 +36,7 @@ export default class HeatHandler extends Component {
         this.setState({userHasCold: false, userHasHeat: true});
         Api.addHeat(offerId, userId, type);
       })
-    }else if (userId) {
+    } else if (userId) {
       Api.addHeat(offerId, userId, type)
     }
     // console.log('Heat: '+this.state.userHasHeat+', Cold: '+this.state.userHasHeat)
@@ -57,6 +58,8 @@ export default class HeatHandler extends Component {
   }
 
   render() {
+    console.log(this.state)
+    
     const {userId, offerId} = this.state;
 
     return (
@@ -67,10 +70,10 @@ export default class HeatHandler extends Component {
         >
           <KeyboardArrowDown fontSize="small"/>
         </IconButton >
-        111°
+        {this.state.heatCount}°
         <IconButton
           classes={{root: "bottone-like down"}}
-          onClick={(e) => this.handleHeat(e, 'down')}
+          onClick={(e) => this.handleHeat(e, 'heat')}
         >
           <KeyboardArrowUp fontSize="small"/>
         </IconButton>

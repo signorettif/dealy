@@ -6,7 +6,7 @@ import Api from '../Api';
 import Store from '../Store';
 
 // Style
-import { Typography, Drawer, Button, IconButton, Menu } from '@material-ui/core';
+import { Typography, Drawer, Button, CircularProgress } from '@material-ui/core';
 import "../styles/paginaOfferta.scss"
 
 export default class PaginaOfferta extends Component {
@@ -14,24 +14,19 @@ export default class PaginaOfferta extends Component {
     super(props);
 
     this.state = {
-      data: [],
       open: true
     };
-  }
-
-  handleUpdate(elem, val) {
-    var obj  = {}
-    obj[elem] = val
-    this.setState(obj)
   }
 
   componentWillMount() {
     this.setState({open: true})
 
     const {offerId} = this.props.match.params;
+
     Api.getOfferById(offerId).then(response => {
       // console.log(response);
-      this.handleUpdate('data', response)
+      this.setState({ data: response })
+      console.log(this.state.data)
     })
   }
 
@@ -42,11 +37,14 @@ export default class PaginaOfferta extends Component {
   };
 
   render() {
-    var { data } = this.state;
+    const { data } = this.state;
 
     return (
       <Drawer anchor="right" open={this.state.open} onClose={() => this.toggleDrawer()} classes={{paper: 'drawer-container'}}>
-        <div className="top-content">
+      { this.state && this.state.data ? (
+          <React.Fragment>
+        <div className="top-bar">
+          <HeatHandler offerId={data.id} userId={this.state.userId} heatCount={data.heatCount}/>
         </div>
 
         <div className="central-content">
@@ -75,7 +73,12 @@ export default class PaginaOfferta extends Component {
           <Button classes={{root:'action-button-primary'}} type="submit">
             {"Scopri l'offerta"}
           </Button>
-        </div>
+        </div></React.Fragment>)
+        :(
+          <div className="central-content">
+            <CircularProgress color="primary" />
+          </div>
+        )}
       </Drawer>
     );
   }

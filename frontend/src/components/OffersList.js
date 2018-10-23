@@ -37,7 +37,6 @@ class OffersList extends Component {
         <NavLink
           to={{
             pathname: "/offer/"+ value.id,
-            state: { modal: true, open:true, data: value },
           }}
         >
           <OffertaSingola offerId={key} offer={value} user={user}/>

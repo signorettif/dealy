@@ -1,6 +1,7 @@
 @import "variables";
 
 .heat-count{
+  width: fit-content;
   display: flex;
   vertical-align: middle;
   justify-content: center;
@@ -13,9 +14,8 @@
 
 
   .bottone-like{
-    display: inline-block;
     padding: 2px;
-    margin: auto;
+    margin: auto 4px;
     color: $medium-gray;
 
     &.up{

@@ -48,7 +48,7 @@ class OffertaSingola extends Component {
               {(offer.originalAmount) ? <p className="originale"> {offer.originalAmount}€</p> : null}
               <p className="scontato"> {offer.discountedAmount}€</p>
             </div>
-            <HeatHandler offerId={offer.id} userId={this.state.userId}/>
+            <HeatHandler offerId={offer.id} userId={this.state.userId} heatCount={offer.heatCount}/>
           </div>
         </div>
     )

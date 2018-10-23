@@ -79,19 +79,19 @@ class OfferController extends Controller
     $user_id = $request['user_id'];
     $type = $request['type'];
 
-    if ($type == 'heat') {
-      $offer = Offer::find($offer_id)->increment('heatCount');
-    }
-
-    if ($type == 'cold') {
-      $offer = Offer::find($offer_id)->decrement('heatCount');
-    }
-
     Heats::create([
       'user_id' => $user_id,
       'offer_id' => $offer_id,
       'type' => $type
     ]);
+
+    $heatCount = Offer::find($offer_id)->heat()->where('type', 'heat')->count();
+    $coldCount = Offer::find($offer_id)->heat()->where('type', 'cold')->count();
+    $heat = ($heatCount - $coldCount);
+
+    Offer::where('id', $offer_id)->update(['heatCount' => $heat]);
+
+    return $heat;
   }
 
 }

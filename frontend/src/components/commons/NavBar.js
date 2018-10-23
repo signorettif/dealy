@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { NavLink } from 'react-router-dom';
 import _ from "lodash";
-import Emoji from "./Emoji"
+import Emoji from "./Emoji";
+import Store from "../../Store";
+import Api from "../../Api";
 
 // Style
 import { Typography,MenuItem, Button, IconButton, Menu } from '@material-ui/core';
@@ -12,6 +14,7 @@ export default class NavBar extends Component {
 
   state = {
     anchorEl: null,
+    user: Store.getUser()
   };
 
   handleMenu = event => {
@@ -24,6 +27,7 @@ export default class NavBar extends Component {
 
   render() {
     const { anchorEl } = this.state;
+    const { user } = this.state;
     const open = Boolean(anchorEl);
 
 

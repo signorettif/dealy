@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Authentication routes
 Route::group(['prefix' => 'v1'], function() {
     Route::post('login', 'PassportController@login');
+    Route::get('logout', 'PassportController@logout');
     Route::post( 'createUser', 'PassportController@store');
     Route::get( 'userdetails', 'PassportController@getDetails')->middleware('auth:api');
     Route::get( 'users/userByToken/{token}','PassportController@getUserByToken');

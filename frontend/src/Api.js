@@ -44,6 +44,17 @@ class Api {
             }.bind(this));
     }
 
+    static userLogout() {
+        axios.get(API_ROUTE+'/logout')
+            .then(function (response) {
+                Store.setUser(null);
+                this.handleResponse(response);
+            }.bind(this))
+            .catch(function (error) {
+                this.handleError(error);;
+            }.bind(this));
+    }
+
     static userRegister(data) {
         return axios.post(API_ROUTE+'/createUser', this.dataToFormdata(data))
             .then(function (response) {
@@ -115,9 +126,9 @@ class Api {
 
     //Heat handlers
     static addHeat(offerId, userId, type) {
-        axios.post(API_ROUTE+'/addHeat?offer_id='+offerId+'&user_id='+userId+'&type='+type)
+        return axios.post(API_ROUTE+'/addHeat?offer_id='+offerId+'&user_id='+userId+'&type='+type)
         .then(function (response) {
-            console.log(response);
+            return (response);
         })
         .catch(function (error) {
             console.log(error);

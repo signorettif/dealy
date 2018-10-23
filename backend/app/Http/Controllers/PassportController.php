@@ -65,6 +65,16 @@ class PassportController extends Controller
         }
     }
 
+    public function logout(){
+        if (Auth::check()) {
+            $user = Auth::user()->token();
+            $user->revoke();
+            return ('Logged out user!');
+         }
+
+         return ('No user to logout!');
+    }
+
     public function changePassword(Request $request){
         $this->validate($request, [
             'password' => 'required|min:6',
